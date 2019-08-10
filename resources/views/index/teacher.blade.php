@@ -12,6 +12,7 @@
     <img src="images/teacher.jpg" width="150"> 
     </div>
     <div class="teachtext">
+		<a href="http://123.cn/zhibo/zhibo_rtmp/zhibo.html">看看ta的直播</a>
     	<h3>马嫱&nbsp;&nbsp;<strong>会计基础、会计电算化讲师</strong></h3>
         <h4>个人简介</h4>
         <p>资深财会考试与实务操作讲师；拥有五年财税实务及实操经验。 曾在大型连锁超市担任总会计三年，集团公司两年的会计工作经历。</p>

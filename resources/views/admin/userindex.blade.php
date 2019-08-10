@@ -19,9 +19,9 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">其它系统</a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
+                    <dd><a href="">资讯管理</a></dd>
+                    <dd><a href="">资讯展示</a></dd>
+                    <dd><a href="">资讯添加</a></dd>
                 </dl>
             </li>
         </ul>
@@ -44,13 +44,11 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">资讯管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="/admin/art/index">资讯展示</a></dd>
+                        <dd><a href="/admin/art/add">资讯添加</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

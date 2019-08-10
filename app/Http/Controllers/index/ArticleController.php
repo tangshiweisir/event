@@ -11,7 +11,9 @@ class ArticleController extends Controller
     //咨询列表
     public function index()
     {
-        return view('index/articlelist');
+        $data=\DB::table('advisory')->paginate(5);
+        $left=\DB::table('advisory')->limit(4)->get();
+        return view('index/articlelist',compact('data','left'));
     }
 
     //咨询详情

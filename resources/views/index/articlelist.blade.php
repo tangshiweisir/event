@@ -18,56 +18,25 @@
 </div>
 <div class="clearh"></div>
 <div class="coursetext">
+    @foreach($data as $k=>$v)
 	<div class="articlelist">
-    	<h3><a class="artlink" href="{{url('/index/article')}}">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
-        <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
+    	<h3><a class="artlink" href="{{url('/index/article')}}">{{$v->a_name}}</a></h3>
+        <p>{{$v->a_desc}}</p>
         <p class="artilabel">
         <span class="ask_label">热门资讯</span>
-        <b class="labtime">2015-02-02</b>
+        <b class="labtime">{{date('Y-m-d',$v->c_time)}}</b>
         </p>
         <div class="clearh"></div>
     </div>
-    <div class="articlelist">
-    	<h3><a class="artlink" href="#">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
-        <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
-        <p class="artilabel">
-        <span class="ask_label">热门资讯</span>
-        <b class="labtime">2015-02-02</b>
-        </p>
-        <div class="clearh"></div>
-    </div>
-    <div class="articlelist">
-    	<h3><a class="artlink" href="#">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
-        <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
-        <p class="artilabel">
-        <span class="ask_label">热门资讯</span>
-        <b class="labtime">2015-02-02</b>
-        </p>
-        <div class="clearh"></div>
-    </div>
-    <div class="articlelist">
-    	<h3><a class="artlink" href="#">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
-        <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
-        <p class="artilabel">
-        <span class="ask_label">热门资讯</span>
-        <b class="labtime">2015-02-02</b>
-        </p>
-        <div class="clearh"></div>
-    </div>
+    @endforeach
+
+
     
     
 	<div class="clearh" style="height:20px;"></div>
 	<span class="pagejump">
-    	<p class="userpager-list">
-       	   <a href="#" class="page-number">首页</a>
-           <a href="#" class="page-number">上一页</a>
-           <a href="#" class="page-number">1</a>
-           <a href="#" class="page-number pageractive">2</a>
-           <a href="#" class="page-number">3</a>
-            <a href="#" class="page-number">...</a>
-            <a href="#" class="page-number">10</a>
-           <a href="#" class="page-number">下一页</a>
-           <a href="#" class="page-number">末页</a>
+    	<p class="userpager-list" style="float: right">
+       	  {{ $data->links() }}
         </p>
     </span>
     <div class="clearh" style="height:10px;"></div>
@@ -79,12 +48,9 @@
     <h3 class="righttit">热门资讯</h3>
     <div class="gonggao">
 	<ul class="hotask">
-        	<li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+        @foreach($left as $k=>$v)
+        	<li><a class="ask_link" href="#"><strong>●</strong>{{$v->a_name}}</a></li>
+            @endforeach
         </ul>
     </div>
     </div>

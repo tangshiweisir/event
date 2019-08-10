@@ -54,3 +54,16 @@ Route::any('/index/teacher','index\TeacherController@teacher');
 Route::any('/index/articlelist','index\ArticleController@index');
 //咨询详情
 Route::any('/index/article','index\ArticleController@article');
+
+
+
+
+
+//资讯展示
+Route::get('/admin/art/index','admin\ArtController@index');
+//资讯添加
+Route::get('/admin/art/add','admin\ArtController@add');
+//资讯删除
+Route::get('/admin/art/del','admin\ArtController@del');
+//资讯后台添加执行
+Route::post('/art/add_do','admin\ArtController@add_do');
