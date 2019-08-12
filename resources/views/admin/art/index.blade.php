@@ -21,7 +21,7 @@
             <td>{{$v->a_name}}</td>
             <td>{{$v->a_desc}}</td>
             <td>@if($v->a_hot==0)是 @else 否 @endif</td>
-            <td>{{date('Y-m-d H:i:s',$v->c_time)}}</td>
+            <td>userindex</td>
             <td><a href="/admin/art/del?a_id={{$v->a_id}}">删除</a>||<a href="/admin/art/up?a_id={{$v->a_id}}">修改</a></td>
         </tr>
             @endforeach

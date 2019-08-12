@@ -1,4 +1,4 @@
-@extends("admin/techerindex")
+@extends("admin/userindex")
 @section("content")
     <table class="layui-table">
         <colgroup>
