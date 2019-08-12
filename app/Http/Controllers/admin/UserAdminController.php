@@ -76,4 +76,40 @@ class UserAdminController extends Controller
         }
     }
 
+
+
+    //讲师添加
+    public function teacherCreate(Request $request){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            return view('admin/teacher/teacherCreate');
+        }elseif($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $createData = $request->post();
+            if(empty($createData)){
+                return [
+                    'code' => -1,
+                    'msg' => '申请信息不能为空'
+                ];
+            }
+            $info = TeacherModel::where(['t_name' => $request->t_name])->get()->toArray();
+            if($info){
+                return [
+                    'code' => -1,
+                    'msg' => '该账号已存在'
+                ];
+            }
+            $res = TeacherModel::insert($createData);
+            if($res){
+                return [
+                    'code' => 200,
+                    'msg' => '正在申请，请耐心等待'
+                ];
+            }else{
+                return [
+                    'code' => -1,
+                    'msg' => '申请失败，请稍后再试'
+                ];
+            }
+        }
+    }
+
 }

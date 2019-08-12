@@ -2,13 +2,34 @@
 
 namespace App\Http\Controllers\index;
 
+
+use App\Models\CourseModel;
+use App\Models\CourseTypeModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
+    //前台主页
     public function index()
     {
-        return view('index/index');
+        $courseType = CourseTypeModel::take(4)->get();
+
+        $course = CourseModel::where(['excellent_course' => 1, 'audit' => 1])->take(8)->get();
+
+        return view('index/index',compact('courseType','course'));
+    }
+
+    //根据课程分类ID获取课程
+    public function typeGetCourse(Request $request){
+        $course_id = $request->course_id;
+
+        $whereData = [
+            'course_id' => $course_id,
+            'excellent_course' => 1,
+            'audit' => 1
+        ];
+        $CourseInfo = CourseModel::where($whereData)->get()->toArray();
+        return $CourseInfo;
     }
 }

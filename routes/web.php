@@ -26,6 +26,24 @@ route::any('/admin/user/searchpage','admin\\UserAdminController@searchPage');
 route::any('/admin/user/auditteacher','admin\\UserAdminController@auditTeacher');
 
 
+
+
+
+//讲师添加
+Route::any('/admin/teacher/create','admin\UserAdminController@teacherCreate');
+
+
+//讲师登录
+Route::any('/admin/teacher/login','admin\TecherAdminController@login');
+Route::any('/admin/teacher/loginOut','admin\TecherAdminController@loginOut');
+
+
+
+
+
+
+
+
 //讲师后台首页
 Route::get('/admin/techer/index','admin\TecherAdminController@index');
 //前台首页
