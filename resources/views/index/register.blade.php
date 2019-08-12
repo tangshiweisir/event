@@ -11,28 +11,85 @@
 <form>
     <div>
     <p class="formrow"><label class="control-label" for="register_email">邮箱地址</label>
-    <input type="text"></p>
-    <span class="text-danger">请输入邮箱地址</span>
+    <input type="text" name="user_email" placeholder="请输入邮箱地址"></p>
     </div>
     <div>
-    <p class="formrow"><label class="control-label" for="register_email">昵称</label>
-    <input type="text"></p>
-    <span class="text-danger">该怎么称呼你？ 中、英文均可，最长14个英文或7个汉字</span>
+    <p class="formrow"><label class="control-label" for="register_email">用户名</label>
+    <input type="text" name="user_name" placeholder="请输入你的用户名,用户名是你的账号请保存"></p>
     </div>
     <div>
     <p class="formrow"><label class="control-label" for="register_email">密码</label>
-    <input type="password"></p>
-    <span class="text-danger">5-20位英文、数字、符号，区分大小写</span>
+    <input type="password" name="user_pwd" placeholder="请输入密码,6-16位数字,请保存好自己的密码"></p>
     </div>
     <div>
     <p class="formrow"><label class="control-label" for="register_email">确认密码</label>
-    <input type="password"></p>
-    <span class="text-danger">再输入一次密码</span>
+    <input type="password" name="user_pwd1" placeholder="再输入一次密码"></p>
     </div>
     <div class="loginbtn reg">
-    <button type="submit" class="uploadbtn ub1">注册</button>
+    <button  class="uploadbtn ub1" id="submit">注册</button>
     </div>
 
 </form>
 </div>
 @endsection
+<script src="/index/js/jquery-1.8.0.min.js"></script>
+<script>
+    $(function(){
+
+
+            //注册
+            $('#submit').click(function(){
+                var user_name=$("input[name='user_name']").val();
+                var user_email=$("input[name='user_email']").val();
+                var user_pwd=$("input[name='user_pwd']").val();
+                var user_pwd1=$("input[name='user_pwd1']").val();
+
+
+
+                //验证邮箱为空
+                if(user_email==""){
+                    alert('邮箱不能为空');
+                    return false;
+                }
+                //验证用户名为空
+                if( user_name=="")
+                {
+                    alert('用户名不能为空');
+                    return false;
+                }
+                //验证密码
+                reg=/^[0-9]{6,16}$/;
+                if(user_pwd==""){
+                   alert('密码不能为空');
+                    return false;
+                }else if(!reg.test(user_pwd)){
+                    alert('密码请输入6-16位数字');
+                    return false;
+                }
+                //验证确认密码
+                if(user_pwd1==""){
+                   alert('确认密码不能为空');
+                    return false;
+                }else if(user_pwd1 !== user_pwd){
+                    alert('密码与确认密码不一致');
+                    return false;
+                }
+//
+                $.ajax({
+                    type:'post',
+                    data:{user_name:user_name,user_email:user_email,user_pwd:user_pwd},
+                    url:"/index/registerDo",
+                    dataType:"json",
+                    success:function(msg){
+                        if(msg.code==1){
+                            alert(msg.msg);
+                            location.href="/index/login";
+                        }else{
+                            alert(msg.msg);
+                        }
+                    }
+                })
+            return false;
+        })
+    })
+</script>

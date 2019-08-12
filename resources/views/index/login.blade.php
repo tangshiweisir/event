@@ -11,36 +11,65 @@
 <div>
     <p class="formrow">
     <label class="control-label" for="register_email">帐号</label>
-    <input type="text">
+    <input type="text" name="user_name" placeholder="请输入用户名">
     </p>
-    <span class="text-danger">请输入Email地址 / 用户昵称</span>
 </div>
 <div>
     <p class="formrow">
     <label class="control-label" for="register_email">密码</label>
-    <input type="password">
+    <input type="password" name="user_pwd" placeholder="请输入用户名密码">
     </p>
-    <p class="help-block"><span class="text-danger">密码错误</span></p>
 </div>
 <div class="loginbtn">
 	<label><input type="checkbox"  checked="checked"> <span class="jzmm">记住密码</span> </label>&nbsp;&nbsp;
-    <button type="submit" class="uploadbtn ub1">登录</button>
+    <button id="submit" class="uploadbtn ub1" >登录</button>
     
 </div>
 <div class="loginbtn lb">
-   <a href="#" class="link-muted">还没有账号？立即免费注册</a>
-   <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>   
-   <a href="forgetpassword.html" class="link-muted">找回密码</a>
+   <a href="/index/register" class="link-muted">还没有账号？立即免费注册</a>
+   <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+   <a href="/index/emailcheck" class="link-muted">找回密码</a>
 </div>
 </form>
-<div class="hezuologo">
-    <span class="hezuo">使用合作网站账号登录</span>
-    <div class="hezuoimg">
-    <img src="images/hezuoqq.png" class="hzqq" title="QQ" width="40" height="40"/>
-    <img src="images/hezuowb.png" class="hzwb" title="微博" width="40" height="40"/>
-    </div>
-    
-  </div>
+
 </div>
 
 @endsection
+<script src="/index/js/jquery-1.8.0.min.js"></script>
+<script>
+    $(function(){
+        //登陆
+        $('#submit').click(function(){
+            var user_name=$("input[name='user_name']").val();
+            var user_pwd=$("input[name='user_pwd']").val();
+
+            //验证用户名为空
+            if( user_name=="")
+            {
+                alert('用户名不能为空');
+                return false;
+            }
+            //验证密码
+            reg=/^[0-9]{6,16}$/;
+            if(user_pwd==""){
+                alert('密码不能为空');
+                return false;
+            }
+            $.ajax({
+                type:'post',
+                data:{user_name:user_name,user_pwd:user_pwd},
+                url:"/index/loginDo",
+                dataType:"json",
+                success:function(msg){
+                    if(msg.code==1){
+                        alert(msg.msg);
+                        location.href="/index/index";
+                    }else{
+                        alert(msg.msg);
+                    }
+                }
+            })
+            return false;
+        })
+    })
+</script>
