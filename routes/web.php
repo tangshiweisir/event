@@ -18,13 +18,16 @@ Route::get('/', function () {
 
 //管理员后台首页
 Route::get('/admin/user/index','admin\UserAdminController@index');
+//讲师列表、管理、锁定
+route::any('/admin/user/teacherlist','admin\\UserAdminController@teacherList');
+//搜索+分页
+route::any('/admin/user/searchpage','admin\\UserAdminController@searchPage');
+//审核讲师
+route::any('/admin/user/auditteacher','admin\\UserAdminController@auditTeacher');
+
+
 //讲师后台首页
 Route::get('/admin/techer/index','admin\TecherAdminController@index');
-
-
-
-
-
 //前台首页
 Route::any('/index/index','index\IndexController@index');
 //前台登录
@@ -54,9 +57,6 @@ Route::any('/index/teacher','index\TeacherController@teacher');
 Route::any('/index/articlelist','index\ArticleController@index');
 //咨询详情
 Route::any('/index/article','index\ArticleController@article');
-
-
-
 
 
 //资讯展示

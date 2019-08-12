@@ -52,6 +52,13 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
+                    <a class="" href="javascript:;">讲师管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/user/auditteacher">讲师审核</a></dd>
+                        <dd><a href="/admin/user/teacherlist">讲师列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
                     <a href="javascript:;">解决方案</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">列表一</a></dd>
