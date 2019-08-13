@@ -7,20 +7,23 @@
 
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
+
+	@foreach($res as $k=>$v)
 <div class="coursepic tecti">
 	<div class="teaimg">
     <img src="images/teacher.jpg" width="150"> 
     </div>
     <div class="teachtext">
 		<a href="http://123.cn/zhibo/zhibo_rtmp/zhibo.html">看看ta的直播</a>
-    	<h3>马嫱&nbsp;&nbsp;<strong>会计基础、会计电算化讲师</strong></h3>
+    	<h3>{{$v->t_name}}<strong>&nbsp;&nbsp;讲师</strong></h3>
         <h4>个人简介</h4>
-        <p>资深财会考试与实务操作讲师；拥有五年财税实务及实操经验。 曾在大型连锁超市担任总会计三年，集团公司两年的会计工作经历。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$v->t_desc}}</p>
         <h4>授课风格</h4>
-        <p>马老师讲授的课程紧扣大纲，重点突出；举例风趣幽默，讲解通俗易懂;传授的学习方法简洁有效；同时，注意与学员进行各种交流，及时解答学员疑惑，反馈学员建议，深受好评。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{$v->t_style}}</p>
     </div>
     <div class="clearh"></div>
 </div>
+	@endforeach
 
 <div class="clearh"></div>
 
