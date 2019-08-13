@@ -29,15 +29,9 @@
 				}
 			}
 		}
-
-
 	</script>
-
-
 </head>
-
 <body>
-
 <div class="head" id="fixed">
 	<div class="nav">
 		<span class="navimg"><a href="{{url('/index/index')}}"><img border="0" src="images/logo.png"></a></span>
@@ -60,13 +54,10 @@
                 <p>讲师</p>
             </span>
         </span>-->
-
-
-
-            <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
+            <a href="{{url('index/mycourse')}}"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">{{$user_info['user_name']}}</a>
             <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
                 <span style="background:#fff;">
-                	<a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
+                	<a href="{{url('index/mycourse')}}" style="width:70px; display:block;" class="link2 he ico" target="_blank">{{$user_info['user_name']}}</a>
                 </span>
                 <div class="clearh"></div>
                 <ul class="logmine" >

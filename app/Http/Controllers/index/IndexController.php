@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\index;
 
-
+use App\Models\UserIndexModel;
 use App\Models\CourseModel;
 use App\Models\CourseTypeModel;
 use Illuminate\Http\Request;
@@ -16,8 +16,9 @@ class IndexController extends Controller
         $courseType = CourseTypeModel::take(4)->get();
 
         $course = CourseModel::where(['excellent_course' => 1, 'audit' => 1])->take(8)->get();
-
-        return view('index/index',compact('courseType','course'));
+        $user_id = session('user_id');
+        $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
+        return view('index/index',compact('courseType','course'),compact('user_info','user_info'));
     }
 
     //根据课程分类ID获取课程

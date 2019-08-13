@@ -10,26 +10,15 @@
 <script src="/index/js/jquery-1.8.0.min.js"></script>
 <script src="/index/js/jquery.tabs.js"></script>
 <script src="/index/js/mine.js"></script>
-
-
-<script type="text/javascript">
-$(function(){
-	$('.demo2').Tabs({
-		event:'click'
-	});
-});
-</script>
-
 </head>
-
 <body>
 <div class="head" id="fixed">
 	<div class="nav">
     	<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
         <ul class="nag">
-        	<li><a href="courselist.html" class="link1 current">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacherlist.html" class="link1">讲师</a></li>
+        	<li><a href="/index/courselist" class="link1 current">课程</a></li>
+            <li><a href="/index/articlelist" class="link1">资讯</a></li>
+            <li><a href="/index/teacherlist" class="link1">讲师</a></li>
             <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
             <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
 
@@ -46,10 +35,11 @@ $(function(){
             </span>
         </span>-->
         	<!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
+
+        	{{--<span class="exambtn_lore">--}}
+                 {{--<a class="tkbtn tklog" href="/index/login">登录</a>--}}
+                 {{--<a class="tkbtn tkreg" href="/index/register">注册</a>--}}
+            {{--</span>--}}
             <!--登录后-->
             <!--<div class="logined">
                 <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
@@ -66,7 +56,6 @@ $(function(){
                     </ul>
                 </span>
             </div>-->
-
         </span>
     </div>
 </div>
@@ -77,13 +66,12 @@ $(function(){
 	<div class="membhead">
     <div style="text-align:center;"><img src="images/0-0.JPG" width="80" ></div>
     <div style="width:220px;text-align:center;">
-    <p class="membUpdate mine">某某某</p> 
-    <p class="membUpdate mine"><a href="mysetting.html">修改信息</a>&nbsp;|&nbsp;<a href="myrepassword.html">修改密码</a></p>
+    <p class="membUpdate mine">{{$user_info['user_name']}}</p>
+    <p class="membUpdate mine"><a href="/index/upduser?user_id={{$user_info['user_id']}}">修改信息</a>&nbsp;|&nbsp;<a href="myrepassword.html">修改密码</a></p>
     <div class="clearh"></div>
     </div>
     </div>
     <div class="memb">
-   
     <ul>
     	<li class="currnav"><a class="mb1" href="mycourse.html">我的课程</a></li>
 		<li><a class="mb3" href="myask.html">我的问答</a></li>
@@ -91,16 +79,12 @@ $(function(){
 		<li><a class="mb12" href="myhomework.html">我的作业</a></li>
         <li><a class="mb2" href="training_list.html" target="_blank">我的题库</a></li>
    </ul>
-   
     </div>
-
-    
   </div>
 
-
 	<div class="membcont">
-<h3 class="mem-h3">我的课程</h3>
-<div class="box demo2" style="width:820px;">
+        <h3 class="mem-h3">我的课程</h3>
+        <div class="box demo2" style="width:820px;">
 			<ul class="tab_menu" style="margin-left:30px;">
 				<li class="current">学习中</li>
 				<li>已学完</li>
@@ -120,7 +104,7 @@ $(function(){
                             <p class="goon"><a href="video.html"><span>继续学习</span></a></p>
                             </div>
                         </li>
-<li>
+                        <li>
                             <div class="courseli">
                             <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
                             <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
@@ -130,7 +114,7 @@ $(function(){
                             <p class="goon"><a href="video.html"><span>继续学习</span></a></p>
                             </div>
                         </li>
-<li>
+                        <li>
                             <div class="courseli">
                             <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
                             <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
@@ -140,11 +124,6 @@ $(function(){
                             <p class="goon"><a href="video.html"><span>继续学习</span></a></p>
                             </div>
                         </li>
-                        
-                        
-						
-                        
-                       
                         <div style="height:10px;" class="clearfix"></div>
                     </ul>
                     
@@ -213,14 +192,9 @@ $(function(){
 			</div>
 		</div>
 </div>
-
-
 <div class="clearh"></div>
 </div>
-
 <!-- InstanceEndEditable -->
-
-
 <div class="clearh"></div>
 <div class="foot">
 <div class="fcontainer">
@@ -258,4 +232,3 @@ $(function(){
 </body>
 
 <!-- InstanceEnd --></html>
-@endsection

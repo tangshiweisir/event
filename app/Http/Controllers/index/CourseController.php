@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\index;
 
+
+use App\Models\UserIndexModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,12 +18,47 @@ class CourseController extends Controller
     }
 
 
-    /*
+    /**
      * 个人中心
      * */
     public function mycourse()
     {
-        return view('index/mycourse');
+        $user_id = session('user_id');
+        $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
+        return view('index/mycourse',['user_info'=>$user_info]);
+    }
+
+
+    /**
+     * @content 用户修改信息
+     *
+     * */
+    public function updUserMessage(Request $request)
+    {
+        $user_id =  $request->user_id;
+        $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
+
+        return view("index/upduser",['user_info'=>$user_info]);
+    }
+
+    /**
+     * @content 执行用户修改信息
+     *
+     * */
+    public function updUserMessageDo(Request $request)
+    {
+        $user_id = $request->user_id;
+        $data = $request->all();
+        unset($data['user_id']);
+
+        $res = UserIndexModel::where(['user_id'=>$user_id])->update($data);
+
+        if($res){
+            echo "<script>alert('修改成功');location.href='/index/mycourse'</script>";
+        }else{
+            echo "<script>alert('未修改');location.href='/index/mycourse'</script>";
+        }
+
     }
 
     //加入学习
@@ -35,7 +72,6 @@ class CourseController extends Controller
      {
          return view('index/coursecont1');
      }
-
 
      //开始学习
      public function video()

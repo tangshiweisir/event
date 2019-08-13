@@ -53,6 +53,7 @@ class LoginController extends Controller
                     DB::table('user_index')->where(['user_id'=>$user_id])->update($where);
                 }
                 Cookie::queue('user_id', $user_id);
+                session(['user_id'=>$user_id]);
                 $arr=[
                     'code'=>1,
                     'msg'=>'登陆成功'
@@ -97,4 +98,7 @@ class LoginController extends Controller
         }
 
     }
+
+
+
 }
