@@ -11,11 +11,31 @@ use Illuminate\Support\Facades\DB;
 class CourseController extends Controller
 {
     /*
-     * 课程展示
-     * */
+      * 课程展示
+      * */
     public function courseList()
     {
-        return view('index/courselist');
+        $data=DB::table('course_type')->where(['p_id'=>0])->get();
+        foreach($data as $k=>$v){
+            $data[$k]->arr=$res=DB::table('course_type')->where(['p_id'=>$v->course_type_id])->get();
+        }
+        $dataInfo=DB::table('course')->where(['status'=>1,'is_pass'=>1])->simplePaginate(6);
+
+        return view('index/courselist',['data'=>$data,'dataInfo'=>$dataInfo]);
+    }
+
+    public function coursetypeshow(){
+        $course_type_id=$_GET['course_type_id'];
+        $dataInfo=DB::table('course')->where(['status'=>1,'is_pass'=>1,'course_type_id'=>$course_type_id])->simplePaginate(6);
+//        echo 111;die;
+//       var_dump($dataInfo);die;
+        return  view('index/coursetypeshow',['dataInfo'=>$dataInfo]);
+    }
+    /*
+     * 进入课程详情
+     */
+    public function courseDetail(){
+        return view('index.coursedetail');
     }
 
 
@@ -66,6 +86,7 @@ class CourseController extends Controller
         return view('index/coursecont');
     }
 
+<<<<<<< HEAD
      //课程详情
      public function coursecont1()
      {
@@ -95,6 +116,8 @@ class CourseController extends Controller
         }
     }
 
+=======
+>>>>>>> zcy
 
     //开始学习
      public function video()

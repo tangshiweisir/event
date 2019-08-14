@@ -37,12 +37,20 @@ Route::get('/admin/techer/index','admin\TecherAdminController@index');
 //Route::any('/index/login','index\LoginController@index');
 ////前台注册
 //Route::any('/index/register','index\RegisterController@index');
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> zcy
 //课程列表
-Route::any('/index/courselist','index\CourseController@courseList');
+Route::get('/index/courselist','index\CourseController@courseList');
+//课程分类下的课程列表
+Route::get('/index/coursetypeshow','index\CourseController@coursetypeshow');
+//进入课程详情
+Route::get('/index/courseDetail','index\CourseController@courseDetail');
+
 //课程加入学习
 Route::any('/index/coursecont','index\CourseController@coursecont');
-//课程详情
-Route::any('/index/coursecont1','index\CourseController@coursecont1');
 //加入学习
 Route::any('/index/video','index\CourseController@video');
 //添加留言
