@@ -45,12 +45,9 @@ Route::get('/index/courselist','index\CourseController@courseList');
 Route::get('/index/coursetypeshow','index\CourseController@coursetypeshow');
 //进入课程详情
 Route::get('/index/courseDetail','index\CourseController@courseDetail');
-<<<<<<< HEAD
 
 Route::any('/index/courselist','index\CourseController@courseList');
 Route::any('/index/index/typeGetCourse','index\IndexController@typeGetCourse');
-=======
->>>>>>> zcy
 //课程加入学习
 Route::get('/index/coursecont','index\CourseController@coursecont');
 
