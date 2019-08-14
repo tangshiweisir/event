@@ -126,7 +126,7 @@ class CourseController extends Controller
             ];
             return  $request;
         }else{
-            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'period_id'=>1]);
+            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'period_id'=>1,'c_time'=>time()]);
             if($res){
                 $request=[
                     'code'=>2,
