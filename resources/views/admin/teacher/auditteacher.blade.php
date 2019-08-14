@@ -77,6 +77,7 @@
                 //弹框
                 function diag() {
                     var str=prompt("请写出审核失败的原因");
+                    // console.log(str);
                     return str;
                 }
                 //审核失败
@@ -85,6 +86,9 @@
                     var audit_reason = diag();
                     if(audit_reason == ""){
                         layer.msg("请写出审核失败的原因");
+                        return;
+                    }else if(audit_reason == null){
+                        layer.msg("取消操作");
                         return;
                     }
                     $.ajax({
@@ -101,23 +105,6 @@
                         }
                     });
                 });
-                //搜索+分页
-                // search.click(function () {
-                //     var type=$("#t_name").val();
-                //     $.ajax({
-                {{--url:"{{url('admin/materiallist')}}",--}}
-                // data:{type:type},
-                // async:true,
-                // success:function(res){
-                //     $('.page').remove();
-                //     $("body").html(res);
-                // }
-                // });
-                // });
-
-
-
-
             });
         });
 

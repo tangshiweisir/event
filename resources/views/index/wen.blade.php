@@ -18,7 +18,7 @@
         <div class="memb">
             <ul>
                 <li><a class="mb1" href="{{url('index/mycourse')}}">我的课程</a></li>
-                <li><a class="mb3" href="{{url('index/wen')}}">我的问答</a></li>
+                <li  class="currnav"><a class="mb3" href="{{url('index/wen')}}">我的问答</a></li>
                 <li><a class="mb4" href="{{url('index/meword')}}">我的笔记</a></li>
                 <li><a class="mb12" href="myhomework.html">我的作业</a></li>
                 <li><a class="mb2" href="training_list.html" target="_blank">我的题库</a></li>
@@ -36,21 +36,25 @@
                         <input type="hidden" value="{{$data->user_id}}" id="uid">
                         @foreach($arr as $k=>$v)
                             <div>
-                                <h4 style="color: red">问:</h4>
-                                <a href="#" period_id="{{$v['period_id']}}" class="con">
-                                    {{$v['user_name']}}:
-                                    {{$v['l_contents']}}
+                                <h4 style="color: #9e362f">我的问题:</h4>
+                                <a href="#" period_id="{{$v['wen_id']}}" class="con">
+                                    {{--{{$v['user_name']}}:--}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {{$v['wen_content']}}
                                 </a>
                             </div>
-                        @endforeach
-                        @foreach($arr2 as $k=>$v)
-                            <div>
-                                <p style="color: red">答:</p>
-                                <a href="#" id="qwe">
-                                    {{$v['t_name']}}:
-                                    {{$v['r_content']}}
-                                </a>
-                            </div>
+                            @foreach($arr2 as $kk=>$vv)
+                                @if($vv['wen_id'] == $v['wen_id'])
+                                <div>
+                                    <p style="color: green">&nbsp;&nbsp;&nbsp;老师回答:</p>
+                                    <a href="#" id="qwe">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$vv['t_name']}}:
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$vv['r_content']}}
+                                    </a>
+                                </div>
+                                @endif
+                            @endforeach
                         @endforeach
                         <div style="height:10px;" class="clearfix"></div>
                     </ul>

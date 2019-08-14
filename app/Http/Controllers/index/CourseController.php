@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\index;
 
-
+use App\Models\WenModel;
 use App\Models\LeavesWordModel;
 use App\Models\ReplyModel;
 use App\Models\UserIndexModel;
@@ -116,11 +116,6 @@ class CourseController extends Controller
      {
          return view('index/coursecont1');
      }
-
-     //开始学习
-
-
-
     //添加留言
     public function leaveMessage(Request $request)
     {
@@ -143,8 +138,6 @@ class CourseController extends Controller
             }
         }
     }
-
-
     //开始学习
      public function video()
      {
@@ -191,9 +184,14 @@ class CourseController extends Controller
      *
      */
     public function myask(){
-        $arr=LeavesWordModel::join('user_index','user_index.user_id','=','leave_words.user_id')->where('status','=',1)->get()->toArray();
-        $arr2=ReplyModel::join('teacher','reply.t_id','=','teacher.t_id')->get();
-
+        $arr=WenModel::join('user_index','user_index.user_id','=','wen.user_id')
+            ->where('status','=',1)
+            ->get()
+            ->toArray();
+//        dd($arr);
+        $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
+            ->join('teacher','teacher.t_id','=','reply.t_id')
+            ->get();
         $user_id = session('user_id');
         if(empty($user_id)){
             echo "<script>alert('请先登录');location.href='/index/index';</script>";
@@ -209,11 +207,11 @@ class CourseController extends Controller
         $uid=$request->uid;
         $data=[
             'user_id'=>$uid,
-            'l_contents'=>$content,
+            'wen_content'=>$content,
             'c_time'=>time(),
             'status'=>1,
         ];
-        $res=LeavesWordModel::insert($data);
+        $res=WenModel::insert($data);
         if($res){
             echo 1;
         }else{
