@@ -15,7 +15,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+//admin
 //管理员后台首页
 Route::get('/admin/user/index','admin\UserAdminController@index');
 //讲师列表、管理、锁定
@@ -31,15 +31,19 @@ Route::any('/admin/teacher/login','admin\TecherAdminController@login');
 Route::any('/admin/teacher/loginOut','admin\TecherAdminController@loginOut');
 //讲师后台首页
 Route::get('/admin/techer/index','admin\TecherAdminController@index');
-////前台首页
-//Route::any('/index/index','index\IndexController@index');
-////前台登录
-//Route::any('/index/login','index\LoginController@index');
-////前台注册
-//Route::any('/index/register','index\RegisterController@index');
+
+//课程添加页面
+Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
+//课程添加页面
+Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
+//课程展示页面
+Route::get('/admin/user/courseList','admin\CourseController@courseList');
+//课程展示页面
+Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 
 
-//课程列表
+//index
+//前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');
 //课程分类下的课程列表
 Route::get('/index/coursetypeshow','index\CourseController@coursetypeshow');
@@ -88,6 +92,10 @@ Route::get('/admin/art/add','admin\ArtController@add');
 Route::get('/admin/art/del','admin\ArtController@del');
 //资讯后台添加执行
 Route::post('/art/add_do','admin\ArtController@add_do');
+
+
+
+
 //前台首页
 Route::any('/index/index','index\IndexController@index');
 //前台登录页面
@@ -96,8 +104,6 @@ Route::any('/index/login','index\LoginController@login');
 Route::any('/index/loginDo','index\LoginController@loginDo');
 //退出登录
 Route::any('/index/logout','index\LoginController@logout');
-
-
 //前台注册页面
 Route::any('/index/register','index\RegisterController@register');
 //前台注册
@@ -112,5 +118,3 @@ Route::any('/index/codecheck','index\PasswordController@codecheck');
 Route::any('/index/password','index\PasswordController@password');
 //修改密码
 Route::any('/index/passwordDo','index\PasswordController@passwordDo');
-
-
