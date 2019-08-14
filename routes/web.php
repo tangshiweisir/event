@@ -37,11 +37,8 @@ Route::get('/admin/techer/index','admin\TecherAdminController@index');
 //Route::any('/index/login','index\LoginController@index');
 ////前台注册
 //Route::any('/index/register','index\RegisterController@index');
-<<<<<<< HEAD
-=======
 
 
->>>>>>> zcy
 //课程列表
 Route::get('/index/courselist','index\CourseController@courseList');
 //课程分类下的课程列表

@@ -86,7 +86,6 @@ class CourseController extends Controller
         return view('index/coursecont');
     }
 
-<<<<<<< HEAD
      //课程详情
      public function coursecont1()
      {
@@ -116,8 +115,6 @@ class CourseController extends Controller
         }
     }
 
-=======
->>>>>>> zcy
 
     //开始学习
      public function video()
