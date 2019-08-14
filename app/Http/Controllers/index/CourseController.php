@@ -10,15 +10,36 @@ use App\Models\UserStudyModel;
 use App\Models\WordModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
     /*
-     * 课程展示
-     * */
+      * 课程展示
+      * */
     public function courseList()
     {
-        return view('index/courselist');
+        $data=DB::table('course_type')->where(['p_id'=>0])->get();
+        foreach($data as $k=>$v){
+            $data[$k]->arr=$res=DB::table('course_type')->where(['p_id'=>$v->course_type_id])->get();
+        }
+        $dataInfo=DB::table('course')->where(['status'=>1,'is_pass'=>1])->simplePaginate(6);
+
+        return view('index/courselist',['data'=>$data,'dataInfo'=>$dataInfo]);
+    }
+
+    public function coursetypeshow(){
+        $course_type_id=$_GET['course_type_id'];
+        $dataInfo=DB::table('course')->where(['status'=>1,'is_pass'=>1,'course_type_id'=>$course_type_id])->simplePaginate(6);
+//        echo 111;die;
+//       var_dump($dataInfo);die;
+        return  view('index/coursetypeshow',['dataInfo'=>$dataInfo]);
+    }
+    /*
+     * 进入课程详情
+     */
+    public function courseDetail(){
+        return view('index.coursedetail');
     }
     /**
      * 个人中心
@@ -77,9 +98,7 @@ class CourseController extends Controller
         $user_id = $request->user_id;
         $data = $request->all();
         unset($data['user_id']);
-
         $res = UserIndexModel::where(['user_id'=>$user_id])->update($data);
-
         if($res){
             echo "<script>alert('修改成功');location.href='/index/mycourse'</script>";
         }else{
@@ -97,8 +116,37 @@ class CourseController extends Controller
      {
          return view('index/coursecont1');
      }
+
      //开始学习
-    public function video()
+
+
+
+    //添加留言
+    public function leaveMessage(Request $request)
+    {
+        $user_id = session('user_id');
+        $text = $_POST['text'];
+        if (empty($user_id)){
+            $request=[
+                'code'=>1,
+                'font'=>'请先登录'
+            ];
+            return  $request;
+        }else{
+            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'period_id'=>1]);
+            if($res){
+                $request=[
+                    'code'=>2,
+                    'font'=>'留言成功，待审核'
+                ];
+                return   $request;
+            }
+        }
+    }
+
+
+    //开始学习
+     public function video()
      {
          return view('index/video');
      }
