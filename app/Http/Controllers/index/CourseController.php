@@ -35,7 +35,19 @@ class CourseController extends Controller
      * 进入课程详情
      */
     public function courseDetail(){
-        return view('index.coursedetail');
+        $course_id=$_GET['course_id'];
+        $data=DB::table('course')->where(['course_id'=>$course_id,'status'=>1,'is_pass'=>1])->first();
+//        var_dump($data);die;
+        $t_id=$data->t_id;
+        $dataInfo=DB::table('teacher')->where(['t_id'=>$t_id,'audit'=>1])->first();
+//        var_dump($dataInfo);die;
+        return view('index.coursedetail',['data'=>$data,'dataInfo'=>$dataInfo]);
+    }
+    /*
+     * 课程加入学习
+     */
+    public function coursecont(){
+        return view('index.coursecont');
     }
 
 
@@ -80,11 +92,6 @@ class CourseController extends Controller
 
     }
 
-    //加入学习
-    public function coursecont()
-    {
-        return view('index/coursecont');
-    }
 
      //课程详情
      public function coursecont1()

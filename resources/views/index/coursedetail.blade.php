@@ -10,14 +10,16 @@
             <div class="course_img"><img src="images/c1.jpg" width="500"></div>
             <div class="coursetitle">
                 <a class="state">更新中</a>
-                <h2 class="courseh2">会计基础</h2>
-                <p class="courstime">总课时：<span class="course_tt">30课时</span></p>
-                <p class="courstime">课程时长：<span class="course_tt">3小时20分</span></p>
-                <p class="courstime">学习人数：<span class="course_tt">25987人</span></p>
-                <p class="courstime">讲师：马老师</p>
-                <p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">5.0分（10人评价）</span></p>
+
+                <h2 class="courseh2">{{$data->course_name}}</h2>
+                <p class="courstime">总课时：<span class="course_tt">{{$data->course_hour}}课时</span></p>
+                <p class="courstime">课程时长：<span class="course_tt">{{$data->hour_duration}}分钟</span></p>
+                <p class="courstime">学习人数：<span class="course_tt">{{$data->start_people}}人</span></p>
+                <p class="courstime">讲师：{{$dataInfo->t_name}}</p>
+                <p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">{{$data->course_speak_score}}分（{{$data->course_speak_people}}人评价）</span></p>
                 <!--<p><a class="state end">完结</a></p>-->
-                <span class="coursebtn"><a class="btnlink" href="{{url('/index/coursecont1')}}">加入学习</a><a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a><a class="codol sc" href="#">收藏课程</a></span>
+
+                <span class="coursebtn"><a class="btnlink" href="/index/coursecont?course_id={{$data->course_id}}">加入学习</a><a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a><a class="codol sc" href="#">收藏课程</a></span>
                 <div style="clear:both;"></div>
                 <div id="bds">
                     <div class="bdsharebuttonbox">
