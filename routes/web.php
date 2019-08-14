@@ -19,11 +19,11 @@ Route::get('/', function () {
 //管理员后台首页
 Route::get('/admin/user/index','admin\UserAdminController@index');
 //讲师列表、管理、锁定
-route::any('/admin/user/teacherlist','admin\\UserAdminController@teacherList');
+route::any('/admin/user/teacherlist','admin\UserAdminController@teacherList');
 //搜索+分页
-route::any('/admin/user/searchpage','admin\\UserAdminController@searchPage');
+route::any('/admin/user/searchpage','admin\UserAdminController@searchPage');
 //审核讲师
-route::any('/admin/user/auditteacher','admin\\UserAdminController@auditTeacher');
+route::any('/admin/user/auditteacher','admin\UserAdminController@auditTeacher');
 //讲师添加
 Route::any('/admin/teacher/create','admin\UserAdminController@teacherCreate');
 //讲师登录
@@ -46,6 +46,8 @@ Route::get('/index/coursetypeshow','index\CourseController@coursetypeshow');
 //进入课程详情
 Route::get('/index/courseDetail','index\CourseController@courseDetail');
 
+Route::any('/index/courselist','index\CourseController@courseList');
+Route::any('/index/index/typeGetCourse','index\IndexController@typeGetCourse');
 //课程加入学习
 Route::any('/index/coursecont','index\CourseController@coursecont');
 //加入学习
