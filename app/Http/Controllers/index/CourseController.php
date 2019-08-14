@@ -4,6 +4,7 @@ namespace App\Http\Controllers\index;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
