@@ -67,22 +67,12 @@ class CourseController extends Controller
         //用户课程
         #学习中(未学完)
         $userCourse = UserStudyModel::where(['u_id'=>$user_id,'status'=>2])->get()->toArray();
-        if(!$userCourse){
-            return [
-                'code' => 1004,
-                'message' => "该用户没有课程",
-                'data'=>[]
-            ];
-        }
+//        dd($userCourse);
+
         #已学完
         $userCoursed = UserStudyModel::where(['u_id'=>$user_id,'status'=>1])->get()->toArray();
-        if(!$userCoursed){
-            return [
-                'code' => 1004,
-                'message' => "该用户没有课程",
-                'data'=>[]
-            ];
-        }
+//        dd($userCourse);
+
         return view('index/mycourse',[
             'user_info'=>$user_info,
             'usercourse'=>$userCourse,

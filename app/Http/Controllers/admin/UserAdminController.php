@@ -84,20 +84,21 @@ class UserAdminController extends Controller
             return view('admin/teacher/teacherCreate');
         }elseif($_SERVER['REQUEST_METHOD'] == 'POST'){
             $createData = $request->post();
+            $createData['audit']=2;
             if(empty($createData)){
                 return [
                     'code' => -1,
                     'msg' => '申请信息不能为空'
                 ];
             }
-            $info = TeacherModel::where(['t_name' => $request->t_name])->get()->toArray();
+            $info = Teacher::where(['t_name' => $request->t_name])->get()->toArray();
             if($info){
                 return [
                     'code' => -1,
                     'msg' => '该账号已存在'
                 ];
             }
-            $res = TeacherModel::insert($createData);
+            $res = Teacher::insert($createData);
             if($res){
                 return [
                     'code' => 200,
