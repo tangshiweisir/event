@@ -118,16 +118,7 @@ class CourseController extends Controller
         }
 
     }
-<<<<<<< HEAD
-    //加入学习
-    public function coursecont()
-    {
-        return view('index/coursecont');
-    }
-=======
 
-
->>>>>>> zcy
      //课程详情
     public function coursecont1()
      {
