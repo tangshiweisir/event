@@ -166,7 +166,7 @@
                         </div>
                         <div class="c_eform">
                             <textarea rows="7" class="pingjia_con sss"></textarea>
-                            <a href="#" class="fombtn">发布评论</a>
+                            <a href="#" class="fombtn fombtn1">发布评论</a>
                             <div class="clearh"></div>
                         </div>
                         <ul class="evalucourse">
@@ -189,11 +189,11 @@
                 </div>
                 <div class="hide">
                     <div>
-                        <h3 class="pingjia">提问题</h3>
+                        <h3 class="">提问题</h3>
                         <div class="c_eform">
-                            <input type="text" class="pingjia_con" value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='pingjia_con_on'"/><br/>
-                            <textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'">请输入问题的详细内容</textarea>
-                            <a href="#" class="fombtn">发布</a>
+                            <input type="text" class="pingjia_con title_val" placeholder="请输入问题标题"/><br/>
+                            <textarea rows="7" class="pingjia_con title_con" placeholder="请输入问题的详细内容"></textarea>
+                            <a id="fabu" class="fombtn">发布</a>
                             <div class="clearh"></div>
                         </div>
                         <ul class="evalucourse">
@@ -378,12 +378,7 @@
                                     </p>
                                     <p class="help-block"><span class="text-danger">密码错误</span></p>
                                 </div>
-
-
                                 <button type="submit" class="uploadbtn ub1">注册</button>
-
-
-
                             </form>
 
                         </div>
@@ -394,13 +389,9 @@
 
         </div>
     </div>
-
-
     <div class="clearh"></div>
 </div>
 <!-- InstanceEndEditable -->
-
-
 <div class="clearh"></div>
 <div class="foot">
     <div class="fcontainer">
@@ -442,7 +433,8 @@
 <script>
     $(function(){
         layui.use('layer',function(){
-            $(".fombtn").click(function(){
+            //评价
+            $(".fombtn1").click(function(){
                 var _text = $(".sss").val();
                 $.ajax({
                     url:"/index/leaveMessage",
@@ -452,18 +444,28 @@
                         if(res.code=='1'){
 //                            console.log(res);
                             alert(res.font);
-                            location.href='http://a.pro.cn/index/login';
+                            location.href='/index/login';
                         }else{
 //                            console.log(res);
                             alert(res.font);
-                            location.href='http://a.pro.cn/index/coursecont1';
+                            location.href='/index/coursecont';
                         }
 
                     }
                 });
                 return false;
             });
+            var fabu = $("#fabu");
+            fabu.click(function () {
+                var title = $('.title_val').val();
+                var content = $('.title_con').val();
+                console.log(title);
+                console.log(content);
+            })
+
         })
     })
+
+
 
 </script>
