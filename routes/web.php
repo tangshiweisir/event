@@ -39,6 +39,7 @@ Route::get('/admin/techer/index','admin\TecherAdminController@index');
 //Route::any('/index/register','index\RegisterController@index');
 //课程列表
 Route::any('/index/courselist','index\CourseController@courseList');
+Route::any('/index/index/typeGetCourse','index\IndexController@typeGetCourse');
 //课程加入学习
 Route::any('/index/coursecont','index\CourseController@coursecont');
 //课程详情

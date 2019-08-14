@@ -392,7 +392,8 @@
 				<ul id="myTab3" >
 					{{--            <li class="current" onClick="nTabs(this,0);">IT技能</li>--}}
 					@foreach($courseType as $k=>$v)
-						<li class="norma3" courseId={{$v->course_id}}>{{$v->course_name}}</li>
+<!--						--><?php //echo $v['course_name'];die;?>
+						<li class="norma3" courseId={{$v->course_type_id}}>{{$v->course_type_name}}</li>
 					@endforeach
 				</ul>
 				<div class="clearh"></div>
@@ -402,10 +403,10 @@
 							<li>
 								<div class="courselist">
 									<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >
-									<p class="courTit">{{$v->c_name}}</p>
+									<p class="courTit">{{$v->course_name}}</p>
 									<div class="gray">
 										<span>1小时前更新</span>
-										<span class="sp1">{{$v->c_number}}人学习</span>
+										<span class="sp1">{{$v->start_people}}人学习</span>
 										<div style="clear:both"></div>
 									</div>
 								</div>
@@ -498,6 +499,7 @@
 
 		//根据课程分类id 获取 课程
 		var courseId = $(this).attr('courseId');
+		// alert(courseId);return false
 		var html = '';
 		$.ajax({
 			url:'/index/index/typeGetCourse',
@@ -508,10 +510,10 @@
 					html += '<li>\n' +
 							'\t\t\t\t\t<div class="courselist">\n' +
 							'\t\t\t\t\t\t<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >\n' +
-							'\t\t\t\t\t\t<p class="courTit">'+ e.c_name +'</p>\n' +
+							'\t\t\t\t\t\t<p class="courTit">'+ e.course_name +'</p>\n' +
 							'\t\t\t\t\t\t<div class="gray">\n' +
 							'\t\t\t\t\t\t\t<span>1小时前更新</span>\n' +
-							'\t\t\t\t\t\t\t<span class="sp1">'+ e.c_number +'人学习</span>\n' +
+							'\t\t\t\t\t\t\t<span class="sp1">'+ e.start_people +'人学习</span>\n' +
 							'\t\t\t\t\t\t\t<div style="clear:both"></div>\n' +
 							'\t\t\t\t\t\t</div>\n' +
 							'\t\t\t\t\t</div>\n' +
