@@ -165,7 +165,7 @@ $(function(){
                         <p></p>
 	                  </div>
                     <div class="c_eform">                      
-                        <textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='评价详细内容';this.className='pingjia_con'" onclick="if (this.value=='评价详细内容') this.value='';this.className='pingjia_con_on'">评价详细内容</textarea>
+                        <textarea rows="7" class="pingjia_con sss"></textarea>
                        <a href="#" class="fombtn">发布评论</a>
                        <div class="clearh"></div>
                     </div>
@@ -438,3 +438,32 @@ $(function(){
 </body>
 
 <!-- InstanceEnd --></html>
+<script src="/layui/layui.js"></script>
+<script>
+    $(function(){
+        layui.use('layer',function(){
+            $(".fombtn").click(function(){
+                var _text = $(".sss").val();
+                $.ajax({
+                    url:"/index/leaveMessage",
+                    type:'POST',
+                    data:{text:_text},
+                    success:function(res){
+                        if(res.code=='1'){
+//                            console.log(res);
+                            alert(res.font);
+                            location.href='http://a.pro.cn/index/login';
+                        }else{
+//                            console.log(res);
+                            alert(res.font);
+                            location.href='http://a.pro.cn/index/coursecont1';
+                        }
+
+                    }
+                });
+                return false;
+            });
+        })
+    })
+
+</script>

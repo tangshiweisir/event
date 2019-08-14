@@ -45,6 +45,8 @@ Route::any('/index/coursecont','index\CourseController@coursecont');
 Route::any('/index/coursecont1','index\CourseController@coursecont1');
 //加入学习
 Route::any('/index/video','index\CourseController@video');
+//添加留言
+Route::any('/index/leaveMessage','index\CourseController@leaveMessage');
 //个人中心
 Route::any('/index/mycourse','index\CourseController@mycourse')->middleware('normaluser');
 //修改用户信息
