@@ -17,7 +17,11 @@ class IndexController extends Controller
 
         $course = CourseModel::where(['excellent_course' => 1, 'audit' => 1])->take(8)->get();
         $user_id = session('user_id');
-        $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
+        if($user_id){
+            $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
+        }else{
+            $user_info = "";
+        }
         return view('index/index',compact('courseType','course'),compact('user_info','user_info'));
     }
 

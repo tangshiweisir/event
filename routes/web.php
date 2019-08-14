@@ -52,6 +52,17 @@ Route::any('/index/upduser/{user_id?}','index\CourseController@updUserMessage')-
 //执行修改
 Route::any('/index/upduserdo','index\CourseController@updUserMessageDo')->middleware('normaluser');
 
+//我的笔记
+Route::any('/index/meword','index\CourseController@meword')->middleware('normaluser');
+//添加笔记
+Route::any('/index/writeword','index\CourseController@writeword')->middleware('normaluser');
+//执行笔记的添加
+Route::any('/index/worddo','index\CourseController@worddo')->middleware('normaluser');
+//问答
+Route::any('/index/wen','index\CourseController@myask')->middleware('normaluser');
+//提问
+Route::any('/index/getcontent','index\CourseController@getcontent')->middleware('normaluser');
+
 //讲师列表
 Route::any('/index/teacherlist','index\TeacherController@index');
 //讲师详情
@@ -74,6 +85,10 @@ Route::any('/index/index','index\IndexController@index');
 Route::any('/index/login','index\LoginController@login');
 //前台登录
 Route::any('/index/loginDo','index\LoginController@loginDo');
+//退出登录
+Route::any('/index/logout','index\LoginController@logout');
+
+
 //前台注册页面
 Route::any('/index/register','index\RegisterController@register');
 //前台注册

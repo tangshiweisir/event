@@ -100,5 +100,12 @@ class LoginController extends Controller
     }
 
 
-
+    /**
+     * @content 退出登录
+     * */
+    public function logout()
+    {
+        session(['user_id'=>""]);
+        return redirect('/index/index');
+    }
 }
