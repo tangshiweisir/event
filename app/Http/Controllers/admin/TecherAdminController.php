@@ -54,7 +54,7 @@ class TecherAdminController extends Controller
                     't_name' => $t_name,
                     't_pwd' => $t_pwd
                 ];
-                session(['t_id'=>$res['t_id']]);
+                session(['t_id'=>$res[0]['t_id']]);
                 session_start();
                 $_SESSION['teacherInfo'] = $teacherInfo;
                 return [
