@@ -42,7 +42,9 @@ Route::get('/admin/user/courseList','admin\CourseController@courseList');
 Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 //留言审核
 Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
-
+//视频添加
+Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
+Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
 //index
 //前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');
