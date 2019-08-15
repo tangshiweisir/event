@@ -38,9 +38,10 @@ Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
 Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
 //课程展示页面
 Route::get('/admin/user/courseList','admin\CourseController@courseList');
-//课程展示页面
-Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
-
+//留言展示页面
+Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
+//留言审核
+Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
 
 //index
 //前台课程列表展示
@@ -58,6 +59,8 @@ Route::get('/index/coursecont','index\CourseController@coursecont')->middleware(
 Route::any('/index/video','index\CourseController@video');
 //添加留言
 Route::any('/index/leaveMessage','index\CourseController@leaveMessage');
+
+
 //个人中心
 Route::any('/index/mycourse','index\CourseController@mycourse')->middleware('normaluser');
 //修改用户信息

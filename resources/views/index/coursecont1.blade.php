@@ -452,11 +452,11 @@ $(function(){
                         if(res.code=='1'){
 //                            console.log(res);
                             alert(res.font);
-                            location.href='http://a.pro.cn/index/login';
+                            location.href='/index/login';
                         }else{
 //                            console.log(res);
                             alert(res.font);
-                            location.href='http://a.pro.cn/index/coursecont1';
+                            location.href='/index/coursecont';
                         }
 
                     }
