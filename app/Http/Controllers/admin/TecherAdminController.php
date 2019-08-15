@@ -15,7 +15,9 @@ class TecherAdminController extends Controller
         if(empty($_SESSION['teacherInfo'])){
             header("Refresh:2;url=/admin/teacher/login");
         }else{
-            return view('admin/techerindex');
+            $teacherInfo = $_SESSION['teacherInfo'];
+
+            return view('admin/techerindex',['teacherInfo'=>$teacherInfo]);
         }
     }
 
@@ -52,9 +54,9 @@ class TecherAdminController extends Controller
                     't_name' => $t_name,
                     't_pwd' => $t_pwd
                 ];
+                session(['t_id'=>$res['t_id']]);
                 session_start();
                 $_SESSION['teacherInfo'] = $teacherInfo;
-//                session(['teacherInfo',$teacherInfo]);
                 return [
                     'code' => 200,
                     'msg' => '登录成功'
