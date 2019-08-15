@@ -53,18 +53,27 @@ class CourseController extends Controller
      */
     public function coursecont(Request $request){
         $course_id = $request->course_id;
-        $arr=WenModel::join('user_index','user_index.user_id','=','wen.user_id')
-            ->where('status','=',1)
-            ->orderBy('c_time','desc')
+        $arr=WenModel::where(['course_id'=>$course_id])
+            ->join('user_index','user_index.user_id','=','wen.user_id')
+            ->where('wen.status','=',1)
+            ->orderBy('wen.c_time','desc')
             ->get()
             ->toArray();
 //        dd($arr);
+        $course_wen = [];
+        foreach ($arr as $k=>$v){
+            if($v['course_id'] == $course_id){
+                $course_wen[] = $v;
+            }
+        }
+//        echo time();die;
+//        dd($course_wen);
 //        $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
 //            ->join('teacher','teacher.t_id','=','reply.t_id')
 //            ->get();
         $user_id = session('user_id');
         $data = UserIndexModel::where('user_id', $user_id)->first();
-        return view('index/coursecont', ['arr'=>$arr,'data'=>$data,'course_id'=>$course_id]);
+        return view('index/coursecont', ['arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id]);
     }
     /**
      * 个人中心

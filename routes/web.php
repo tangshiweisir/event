@@ -102,7 +102,8 @@ Route::get('/admin/art/del','admin\ArtController@del');
 //资讯后台添加执行
 Route::post('/art/add_do','admin\ArtController@add_do');
 
-
+//shz 讲师后台回答问题，
+route::any('glteacher/reply','admin\\GLTeacherController@reply');
 
 
 //前台首页

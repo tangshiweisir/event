@@ -28,7 +28,7 @@
     </div>
     <div class="membcont">
         <div>
-            <h3 class="mem-h3">我的问答 &nbsp &nbsp   &nbsp   &nbsp  &nbsp  &nbsp  &nbsp  &nbsp  &nbsp  &nbsp </h3>
+            <h3 class="mem-h3">我的问答</h3>
         </div>
         <div class="box demo2" style="width:820px;">
             <div class="tab_box">
@@ -38,12 +38,12 @@
                         @foreach($arr as $k=>$v)
                             <div>
                                 <h4 style="color: #9e362f">课程《<span style="color: #3a87ad">{{$v['course_name']}}</span>》中提出的问题:</h4>
-                                <a href="#" period_id="{{$v['wen_id']}}" class="con">
+                                <span period_id="{{$v['wen_id']}}" class="con">
                                     {{--{{$v['user_name']}}:--}}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {{$v['wen_content']}}
                                     <hr>
-                                </a>
+                                </span>
                             </div>
                             @foreach($arr2 as $kk=>$vv)
                                 @if($vv['wen_id'] == $v['wen_id'])
@@ -53,11 +53,11 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         老师（{{$vv['t_name']}}）的回答:
                                     </p>
-                                    <a href="#" id="qwe">
+                                    <span id="qwe">
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {{$vv['r_content']}}
-                                    </a>
+                                    </span>
                                 </div>
                                 @endif
                             @endforeach

@@ -4,18 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\DB;
->>>>>>> c009c7877768e5a47f1bcd5c117f5314743edbfb
 
 class CourseController extends Controller
 {
   //课程添加页面
   public function courseAdd(){
-<<<<<<< HEAD
       return view('admin/course/courseadd');
-=======
       $data=$this->course_type();
        $teacher=$this->teacher();
       return view('admin/course/courseadd',['data'=>$data,'teacher'=>$teacher]);
@@ -60,27 +55,17 @@ class CourseController extends Controller
           return $file->getError();
       }
     //   var_dump($name);
->>>>>>> c009c7877768e5a47f1bcd5c117f5314743edbfb
-  }
+    }
   //课程添加
-  public function courseAddDo(){
-  
-<<<<<<< HEAD
-}
-//课程展示页面
-public function courseList(){
-    return view('admin/course/courselist');
-}
-//留言展示页面
-public function coursemessageList(){
-    return view('admin/course/coursemessageList');
-}
-=======
-  }
- //课程展示页面
-  public function courseList(){
-    return view('admin/course/courselist');
-  }
+    public function courseAddDo(){
 
->>>>>>> c009c7877768e5a47f1bcd5c117f5314743edbfb
+    }
+    //课程展示页面
+    public function courseList(){
+        return view('admin/course/courselist');
+    }
+    //留言展示页面
+    public function coursemessageList(){
+        return view('admin/course/coursemessageList');
+    }
 }
