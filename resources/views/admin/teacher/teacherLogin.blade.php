@@ -77,7 +77,7 @@
                             icon: res.code,
                             time: 2000 //2秒关闭（如果不配置，默认是3秒）
                         }, function(){
-                            location.href = "/admin/teacher/index";
+                            location.href = "/admin/techer/index";
                         });
                     }else{
                         layer.msg(res.msg,{icon:2});
