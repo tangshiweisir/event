@@ -31,7 +31,6 @@ Route::any('/admin/teacher/login','admin\TecherAdminController@login');
 Route::any('/admin/teacher/loginOut','admin\TecherAdminController@loginOut');
 //讲师后台首页
 Route::get('/admin/techer/index','admin\TecherAdminController@index');
-
 //课程添加页面
 Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
 //课程添加页面
@@ -41,6 +40,16 @@ Route::get('/admin/user/courseList','admin\CourseController@courseList');
 //课程展示页面
 Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 
+//课程添加页面
+Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
+//课程添加页面
+Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
+//课程展示页面
+Route::get('/admin/user/courseList','admin\CourseController@courseList');
+//课程展示页面
+Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
+//课程展示页面
+Route::post('/admin/user/image','admin\CourseController@image');
 
 //index
 //前台课程列表展示

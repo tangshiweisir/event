@@ -78,6 +78,7 @@ class CourseController extends Controller
         //用户信息
         $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
         //用户课程
+
         #学习中(未学完) 该用户id学习的课程中未学完的课程
 
         $userCourse = UserStudyModel::join('course','course.course_id','=','user_study.c_id')
@@ -103,6 +104,15 @@ class CourseController extends Controller
             $userCollect = [];
         }
 //        dd($userCollect);
+
+        #学习中(未学完)
+        $userCourse = UserStudyModel::where(['u_id'=>$user_id,'status'=>2])->get()->toArray();
+//        dd($userCourse);
+
+        #已学完
+        $userCoursed = UserStudyModel::where(['u_id'=>$user_id,'status'=>1])->get()->toArray();
+//        dd($userCourse);
+
         return view('index/mycourse',[
             'user_info'=>$user_info,
             'usercourse'=>$userCourse,
@@ -156,7 +166,7 @@ class CourseController extends Controller
             ];
             return  $request;
         }else{
-            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'period_id'=>1]);
+            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'period_id'=>1,'c_time'=>time()]);
             if($res){
                 $request=[
                     'code'=>2,
