@@ -228,7 +228,7 @@ class CourseController extends Controller
             ->where('wen.status','=',1)
             ->get()
             ->toArray();
-//        dd($arr);
+        dd($arr);
         #问题表 教室表 课程表 回答表
         $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
             ->join('teacher','teacher.t_id','=','reply.t_id')
