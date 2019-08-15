@@ -130,5 +130,7 @@
 @endsection
     <!-- InstanceEndEditable -->
     @section('js')
+        <script>
 
+        </script>
 @endsection

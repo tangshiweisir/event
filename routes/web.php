@@ -51,6 +51,11 @@ Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessage
 //课程展示页面
 Route::post('/admin/user/image','admin\CourseController@image');
 
+
+//视频添加
+Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
+Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
+
 //index
 //前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');

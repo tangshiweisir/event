@@ -1,10 +1,10 @@
-@extends('admin.userindex')
+@extends('admin.techerindex')
 @section('title')
     讲师管理
 @endsection
 @section('content')
 
-        <form class="layui-form" action="/admin/teacher/create" method="post" style="margin-top: 20px;">
+        <form class="layui-form" action="/admin/teacher/create" method="post" style="margin-top: 20px;" >
             <div class="layui-form-item">
                 <label class="layui-form-label">姓名</label>
                 <div class="layui-input-block">
