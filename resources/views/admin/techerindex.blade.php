@@ -36,7 +36,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="/admin/teacher/loginOut">退了</a></li>
         </ul>
     </div>
 
@@ -44,18 +44,24 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;">讲师申请</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/teacher/create">讲师申请</a></dd>
-
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;">视频管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/volid/create">视频添加</a></dd>
                         <dd><a href="javascript:;">视频列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">个人中心</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/glteacher/reply">解决问题</a></dd>
+                        <dd><a href=""></a></dd>
                     </dl>
                 </li>
 
@@ -79,3 +85,4 @@
 </script>
 </body>
 </html>
+@yield('js')
