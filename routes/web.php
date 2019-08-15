@@ -38,7 +38,7 @@ Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
 Route::post('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
 //课程展示页面
 Route::get('/admin/user/courseList','admin\CourseController@courseList');
-<<<<<<< HEAD
+
 //留言展示页面
 Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 //留言审核
@@ -46,15 +46,13 @@ Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
 //视频添加
 Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
 Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
-=======
 //课程广告展示
 Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 //图片上传
 Route::post('/admin/user/image','admin\CourseController@image');
-//图片上传
+//课程删除
 Route::post('/admin/user/courseDel','admin\CourseController@courseDel');
 
->>>>>>> zcy
 //index
 //前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');

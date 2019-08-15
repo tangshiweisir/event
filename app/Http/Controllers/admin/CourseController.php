@@ -5,22 +5,17 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\LeavesWordModel;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
   //课程添加页面
   public function courseAdd(){
-<<<<<<< HEAD
-      return view('admin/course/courseadd');
+    
+    $data=$this->course_type();
+    $teacher=$this->teacher();
+   return view('admin/course/courseadd',['data'=>$data,'teacher'=>$teacher]);
   }
-  //课程添加
-  public function courseAddDo(){
-  
-}
-    //课程展示页面
-    public function courseList(){
-        return view('admin/course/courselist');
-    }
 
 
     //留言展示页面
@@ -28,12 +23,6 @@ class CourseController extends Controller
         $data = LeavesWordModel::select()->orderBy('l_id','desc')->get();
         return view('admin/course/coursemessageList',['data'=>$data]);
     }
-
-=======
-      $data=$this->course_type();
-       $teacher=$this->teacher();
-      return view('admin/course/courseadd',['data'=>$data,'teacher'=>$teacher]);
-  }
   public function course_type(){
       $data=DB::table('course_type')->where(['status'=>1,'p_id'=>0])->get();
       foreach($data as $k=>$v){
@@ -133,7 +122,6 @@ class CourseController extends Controller
     return json_encode($arr);
     
   }
->>>>>>> zcy
 
     public function aduitMessage(Request $request)
     {
