@@ -53,10 +53,12 @@
             </span>
         </span>-->
             <!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
+            @if(session('user_id') == "")
+                <span class="exambtn_lore">
+                     <a class="tkbtn tklog" href="login.html">登录</a>
+                     <a class="tkbtn tkreg" href="register.html">注册</a>
+                </span>
+            @endif
             <!--登录后-->
             <!--<div class="logined">
                 <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
@@ -166,7 +168,7 @@
                         </div>
                         <div class="c_eform">
                             <textarea rows="7" class="pingjia_con sss"></textarea>
-                            <a href="#" class="fombtn">发布评论</a>
+                            <a href="#" class="fombtn fombtn1">发布评论</a>
                             <div class="clearh"></div>
                         </div>
                         <ul class="evalucourse">
@@ -189,32 +191,24 @@
                 </div>
                 <div class="hide">
                     <div>
-                        <h3 class="pingjia">提问题</h3>
+                        <h3 class="">提问题</h3>
                         <div class="c_eform">
-                            <input type="text" class="pingjia_con" value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='pingjia_con_on'"/><br/>
-                            <textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'">请输入问题的详细内容</textarea>
-                            <a href="#" class="fombtn">发布</a>
+                            <textarea rows="7" class="pingjia_con title_con" placeholder="请输入问题的详细内容"></textarea>
+                            <a id="fabu" class="fombtn">发布</a>
                             <div class="clearh"></div>
                         </div>
                         <ul class="evalucourse">
-                            <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-							<p class="pepname">候候</p>
-                            </span>
-                                <span class="pepcont">
-                            <p><a href="#" class="peptitle" target="_blank">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>
-                            <p class="peptime pswer"><span class="pepask">回答(<strong><a class="bluelink" href="#">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong><a class="bluelink" href="#">10</a></strong>)</span>2015-01-02</p>
-                            </span>
-                            </li>
-                            <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-							<p class="pepname">候候</p>
-                            </span>
-                                <span class="pepcont">
-							<p><a href="#" class="peptitle" target="_blank">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>
-                            <p class="peptime pswer"><span class="pepask">回答(<strong><a class="bluelink" href="#">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong><a class="bluelink" href="#">10</a></strong>)</span>2015-01-02</p>
-                            </span>
-                            </li>
+                            @foreach($arr as $k=>$v)
+                                <li>
+                                <span class="pephead"><img src="images/0-0.JPG" width="50" title="">
+                                <p class="pepname">{{$data['user_name']}}</p>
+                                </span>
+                                    <span class="pepcont">
+                                <p><a href="#" class="peptitle" target="_blank">{{$v['wen_content']}}</a></p>
+                                <p class="peptime pswer">{{date("Y-m-d H:i",$v['c_time'])}}</p>
+                                </span>
+                                </li>
+                            @endforeach
                         </ul>
 
                     </div>
@@ -347,7 +341,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="hide">
+                    <div class="hide" id="_reload_">
                         <div>
                             <form class="loginform pop">
                                 <div>
@@ -378,12 +372,7 @@
                                     </p>
                                     <p class="help-block"><span class="text-danger">密码错误</span></p>
                                 </div>
-
-
                                 <button type="submit" class="uploadbtn ub1">注册</button>
-
-
-
                             </form>
 
                         </div>
@@ -394,13 +383,9 @@
 
         </div>
     </div>
-
-
     <div class="clearh"></div>
 </div>
 <!-- InstanceEndEditable -->
-
-
 <div class="clearh"></div>
 <div class="foot">
     <div class="fcontainer">
@@ -442,7 +427,8 @@
 <script>
     $(function(){
         layui.use('layer',function(){
-            $(".fombtn").click(function(){
+            //评价
+            $(".fombtn1").click(function(){
                 var _text = $(".sss").val();
                 $.ajax({
                     url:"/index/leaveMessage",
@@ -452,18 +438,46 @@
                         if(res.code=='1'){
 //                            console.log(res);
                             alert(res.font);
-                            location.href='http://a.pro.cn/index/login';
+                            location.href='/index/login';
                         }else{
 //                            console.log(res);
                             alert(res.font);
-                            location.href='http://a.pro.cn/index/coursecont1';
+                            location.href='/index/coursecont';
                         }
 
                     }
                 });
                 return false;
             });
+            var fabu = $("#fabu");
+            fabu.click(function () {
+                var content = $('.title_con').val();
+                if(content == ""){
+                    layer.msg("请填写你的问题",{icon:2});
+                    return;
+                }
+                var user_id = '{{session('user_id')}}';
+                if(user_id == ""){
+                    layer.msg("系统检测到您还未登录",{icon:2});
+                    return;
+                }
+                var course_id ='{{$course_id}}';
+                // var _hide = $('.hide');
+                $.ajax({
+                    type: "post",
+                    url: "/index/getcontent",
+                    data: {course_id:course_id,user_id:user_id,content:content,'_token':'{{csrf_token()}}'},
+                    success: function (res) {
+                        if(res == 1){
+                            layer.msg('提问成功，请耐心等待回答',{icon:1,time:1000},function () {
+                                window.location.reload($('#_reload_'));
+                            });
+                        }else{
+                            layer.msg('提问失败，',{icon:2,time:1000})
+                        }
+                    }
+                });
+            })
         })
     })
-
 </script>
