@@ -93,7 +93,7 @@ class TecherAdminController extends Controller
         unset($data['MAX_FILE_SIZE']);
         $res=\DB::table('video')->insert($data);
         if($data){
-            echo ok;
+            echo 'ok';
             header("refresh:3;url=/admin/video/list");
         }else{
             echo "no ";
