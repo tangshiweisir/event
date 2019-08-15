@@ -233,7 +233,8 @@ class CourseController extends Controller
         $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
             ->join('teacher','teacher.t_id','=','reply.t_id')
             ->join('course','course.course_id','=','wen.course_id')
-            ->get()->toArray();
+            ->get()
+            ->toArray();
 //        dd($arr2);
         $user_id = session('user_id');
         if(empty($user_id)){

@@ -55,17 +55,17 @@ class CourseController extends Controller
           return $file->getError();
       }
     //   var_dump($name);
-    }
+  }
   //课程添加
-    public function courseAddDo(){
+  public function courseAddDo(){
 
-    }
-    //课程展示页面
-    public function courseList(){
-        return view('admin/course/courselist');
-    }
-    //留言展示页面
-    public function coursemessageList(){
-        return view('admin/course/coursemessageList');
-    }
+}
+//课程展示页面
+public function courseList(){
+    return view('admin/course/courselist');
+}
+//留言展示页面
+public function coursemessageList(){
+    return view('admin/course/coursemessageList');
+}
 }
