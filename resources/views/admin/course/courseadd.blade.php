@@ -5,6 +5,8 @@
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </div>
 <form class="layui-form" action="">
+
+   <input type="hidden" value="" id="image">
   <div class="layui-form-item">
     <label class="layui-form-label">课程名称</label>
     <div class="layui-input-inline">
@@ -14,7 +16,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">课程分类</label>
     <div class="layui-input-inline">
-      <select name="city" lay-verify="required" id='course_type_id'>
+      <select name="course_type_id" lay-verify="required" id='course_type_id'>
       <option value="">请选择</option>
       @foreach($data as $k=>$v)
         <option value="{{$v->course_type_id}}">{{$v->course_type_name}}</option>
@@ -26,17 +28,12 @@
     </div>
   </div>
 
-
   <div class="layui-form-item">
     <label class="layui-form-label">封面上传</label>
     <button type="button" class="layui-btn" id="test1">
      <i class="layui-icon">&#xe67c;</i>上传图片
     </button>
   </div>
-
- 
-
-
   <div class="layui-form-item">
     <label class="layui-form-label">课程课时</label>
     <div class="layui-input-inline">
@@ -76,14 +73,14 @@
   <div class="layui-form-item">
     <label class="layui-form-label">是否精品</label>
     <div class="layui-input-block">
-      <input type="radio" name="is_well" value="是" title="是" checked>
-      <input type="radio" name="is_well" value="是" title="否" >
+      <input type="radio" name="is_well" value="1" title="是" >
+      <input type="radio" name="is_well" value="2" title="否" >
     </div>
   </div>
   <div class="layui-form-item">
     <label class="layui-form-label">课程讲师</label>
     <div class="layui-input-inline">
-      <select name="city" lay-verify="required" id='t_id' >
+      <select name="t_id" lay-verify="required" id='t_id' >
       <option value="">请选择</option>
       @foreach($teacher as $k=>$v)
         <option value="{{$v->t_id}}">{{$v->t_name}}</option>
@@ -99,18 +96,19 @@
   </div>
 </form>
  
-<script>
-// //Demo
-// layui.use('form', function(){
-//   var form = layui.form;
+<!-- <script>
+Demo
+layui.use('form', function(){
+  var form = layui.form;
   
-//   //监听提交
-//   form.on('submit(formDemo)', function(data){
-//     layer.msg(JSON.stringify(data.field));
-//     return false;
-//   });
-// });
-</script>
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+   
+  });
+});
+
+ </script> -->
       @endsection
 <script src="/index/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="/index/js/ajaxfileupload.js"></script>
@@ -126,17 +124,49 @@
           ,url: '/admin/user/image' //上传接口
           ,done: function(res){
             //上传完毕回调
-            alert(res.src);
+            if(res.code==1){
+              layer.msg(res.msg);
+               $('#image').val(res.src);  
+            }
           }
           ,error: function(){
             //请求异常回调
+            layer.msg(上传失败);
           }
       });
       
       $('#submit').click(function(){
       //  layer.msg(12321);
+          var image=$('#image').val();
+          var course_name=$("input[name='course_name']").val();
+          var course_hour=$("input[name='course_hour']").val();
+          var course_money=$("input[name='course_money']").val();
+          var hour_duration=$("input[name='hour_duration']").val();
+          var start_people=$("input[name='start_people']").val();
+          var course_speak_people=$("input[name='course_speak_people']").val();
+          var course_speak_score=$("input[name='course_speak_score']").val();
+          var is_well=$("input[name='is_well']:checked").val();
+          var course_type_id=$("select[name='course_type_id']").val();
+          var t_id=$("select[name='t_id']").val();
+          //传数据
+          $.ajax({
+                    type:'post',
+                    data:{image:image,course_name:course_name,course_hour:course_hour,course_money:course_money,hour_duration:hour_duration,start_people:start_people,course_speak_people:course_speak_people,course_speak_score:course_speak_score,is_well:is_well,course_type_id:course_type_id,t_id:t_id},
+                    url:"/admin/user/courseAddDo",
+                    dataType:"json",
+                    success:function(msg){
+                        if(msg.status==1){
+                            layer.msg(msg.msg);
+                            location.reload();
+                            // location.href="goodsAddShow";
+                        }else{
+                            layer.msg(msg.msg);
+                            // location.href="goodsAddShow";
+                        }
+                    }
 
-          return false;
+                })
+          // return false;
       })
     });
 

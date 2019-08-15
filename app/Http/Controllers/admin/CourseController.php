@@ -46,7 +46,7 @@ class CourseController extends Controller
       if($info){
           $arr=[
               'code'=>1,
-              'font'=>'上传成功',
+              'msg'=>'上传成功',
               'src'=>$new_file_name
           ];
           return json_encode($arr);
@@ -56,12 +56,62 @@ class CourseController extends Controller
     //   var_dump($name);
   }
   //课程添加
-  public function courseAddDo(){
-  
+  public function courseAddDo(Request $request){
+      $data=$request->input();
+      $dataInfo=[
+        'course_name'=>$data['course_name'],
+        'course_type_id'=>$data['course_type_id'],
+        'course_img'=>$data['image'],
+        'course_money'=>$data['course_money'],
+        'course_hour'=>$data['course_hour'],
+        'hour_duration'=>$data['hour_duration'],
+        'start_people'=>$data['start_people'],
+        'course_speak_people'=>$data['course_speak_people'],
+        'course_speak_score'=>$data['course_speak_score'],
+        'is_well'=>$data['is_well'],
+        'c_time'=>time(),
+        'u_time'=>time(),
+        't_id'=>$data['t_id']
+      ];
+      $data=DB::table('course')->insert($dataInfo);
+      if($data){
+        $arr=[
+          'code'=>1,
+          'msg'=>'课程添加成功'
+        ];
+      }else{
+        $arr=[
+          'code'=>0,
+          'msg'=>'课程添加失败'
+        ];
+      }
+      return json_encode($arr);
   }
  //课程展示页面
   public function courseList(){
-    return view('admin/course/courselist');
+    $data = DB::table('course')->join("course_type","course_type.course_type_id","=","course.course_type_id")
+            ->join("teacher","teacher.t_id","=","course.t_id")
+            ->where(["course.status"=>1])->orderBy("course_id","asc")->paginate(5);
+        // var_dump($data);die;  
+    return view('admin/course/courselist',['data'=>$data]);
+  }
+   //课程删除（軟删）
+   public function courseDel(){
+    $course_id=$_POST['course_id'];
+    $data=DB::table('course')->where(['course_id'=>$course_id])->update(['status'=>2]);
+    if($data){
+      $arr=[
+        'code'=>'1',
+        'msg'=>'删除成功'
+      ];
+    }else{
+      $arr=[
+        'code'=>'0',
+        'msg'=>'删除失败'
+      ];
+    }
+    return json_encode($arr);
+    
   }
 
 }

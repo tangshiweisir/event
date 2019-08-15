@@ -4,7 +4,7 @@
         @foreach($dataInfo as $v)
             <li>
                 <div class="courselist">
-                    <a href="/index/courseDetail?course_id={{$v->course_id}}"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c1.jpg" title="会计基础"></a>
+                    <a href="/index/courseDetail?course_id={{$v->course_id}}"><img style="border-radius:3px 3px 0 0;" width="240" src="{{asset($v->course_img)}}" title="会计基础"></a>
                     <p class="courTit"><a href="/index/courseDetail?course_id={{$v->course_id}}">{{$v->course_name}}</a></p>
                     <div class="gray">
                         <span>{{$v->course_hour}} {{$v->hour_duration}}分钟</span>

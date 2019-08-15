@@ -34,14 +34,16 @@ Route::get('/admin/techer/index','admin\TecherAdminController@index');
 
 //课程添加页面
 Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
-//课程添加页面
-Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
+//课程添加
+Route::post('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
 //课程展示页面
 Route::get('/admin/user/courseList','admin\CourseController@courseList');
-//课程展示页面
+//课程广告展示
 Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
-//课程展示页面
+//图片上传
 Route::post('/admin/user/image','admin\CourseController@image');
+//图片上传
+Route::post('/admin/user/courseDel','admin\CourseController@courseDel');
 
 //index
 //前台课程列表展示
