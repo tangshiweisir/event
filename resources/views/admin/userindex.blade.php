@@ -59,6 +59,14 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
+                    <a class="" href="javascript:;">课程管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/user/courseAdd">课程添加</a></dd>
+                        <dd><a href="/admin/user/courseList">课程列表</a></dd>
+                        <dd><a href="/admin/user/coursemessageList">留言展示</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
                     <a href="javascript:;">解决方案</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">列表一</a></dd>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\index;
 
+use App\Models\CourseModel;
 use App\Models\WenModel;
 use App\Models\LeavesWordModel;
 use App\Models\ReplyModel;
@@ -35,7 +36,7 @@ class CourseController extends Controller
 //       var_dump($dataInfo);die;
         return  view('index/coursetypeshow',['dataInfo'=>$dataInfo]);
     }
-    /*
+    /**
      * 进入课程详情
      */
     public function courseDetail(){
@@ -47,11 +48,23 @@ class CourseController extends Controller
 //        var_dump($dataInfo);die;
         return view('index.coursedetail',['data'=>$data,'dataInfo'=>$dataInfo]);
     }
-    /*
+    /**
      * 课程加入学习
      */
-    public function coursecont(){
-        return view('index.coursecont');
+    public function coursecont(Request $request){
+        $course_id = $request->course_id;
+        $arr=WenModel::join('user_index','user_index.user_id','=','wen.user_id')
+            ->where('status','=',1)
+            ->orderBy('c_time','desc')
+            ->get()
+            ->toArray();
+//        dd($arr);
+//        $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
+//            ->join('teacher','teacher.t_id','=','reply.t_id')
+//            ->get();
+        $user_id = session('user_id');
+        $data = UserIndexModel::where('user_id', $user_id)->first();
+        return view('index/coursecont', ['arr'=>$arr,'data'=>$data,'course_id'=>$course_id]);
     }
     /**
      * 个人中心
@@ -70,16 +83,25 @@ class CourseController extends Controller
         $userCourse = UserStudyModel::join('course','course.course_id','=','user_study.c_id')
             ->where(['u_id'=>$user_id,'user_study.status'=>2])
             ->get();
+        if(!$userCourse){
+            $userCourse = [];
+        }
 //        dd($userCourse);
         #已学完
         $userCoursed = UserStudyModel::join('course','course.course_id','=','user_study.c_id')
             ->where(['u_id'=>$user_id,'user_study.status'=>1])
             ->get();
+        if(!$userCoursed){
+            $userCoursed = [];
+        }
 //        dd($userCoursed);
         #收藏
         $userCollect = UserStudyModel::join('course','course.course_id','=','user_study.c_id')
             ->where(['u_id'=>$user_id,'user_study.collect'=>1])
             ->get();
+        if(!$userCollect){
+            $userCollect = [];
+        }
 //        dd($userCollect);
         return view('index/mycourse',[
             'user_info'=>$user_info,
@@ -117,7 +139,6 @@ class CourseController extends Controller
         }
 
     }
-
      //课程详情
     public function coursecont1()
      {
@@ -191,14 +212,19 @@ class CourseController extends Controller
      *
      */
     public function myask(){
+        #用户表 问题表 课程表
         $arr=WenModel::join('user_index','user_index.user_id','=','wen.user_id')
-            ->where('status','=',1)
+            ->join('course','course.course_id','=','wen.course_id')
+            ->where('wen.status','=',1)
             ->get()
             ->toArray();
 //        dd($arr);
+        #问题表 教室表 课程表 回答表
         $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
             ->join('teacher','teacher.t_id','=','reply.t_id')
-            ->get();
+            ->join('course','course.course_id','=','wen.course_id')
+            ->get()->toArray();
+//        dd($arr2);
         $user_id = session('user_id');
         if(empty($user_id)){
             echo "<script>alert('请先登录');location.href='/index/index';</script>";
@@ -210,13 +236,15 @@ class CourseController extends Controller
      * @content 用户对讲师提出问题
      * */
     public function getcontent(Request $request){
-        $content=$request->content;
-        $uid=$request->uid;
+        $content=$request->content ?? "";
+        $uid=$request->user_id ?? "";
+        $course_id = $request->course_id ?? "";
         $data=[
             'user_id'=>$uid,
             'wen_content'=>$content,
             'c_time'=>time(),
             'status'=>1,
+            'course_id'=>$course_id
         ];
         $res=WenModel::insert($data);
         if($res){
@@ -224,6 +252,5 @@ class CourseController extends Controller
         }else{
             echo 2;
         }
-
     }
 }

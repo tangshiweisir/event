@@ -21,6 +21,7 @@
 		<li><a class="mb4" href="{{url('index/meword')}}">我的笔记</a></li>
 		<li><a class="mb12" href="myhomework.html">我的作业</a></li>
         <li><a class="mb2" href="training_list.html" target="_blank">我的题库</a></li>
+        <li><a class="mb5" href="{{url('index/logout')}}">退出登录</a></li>
    </ul>
     </div>
   </div>
