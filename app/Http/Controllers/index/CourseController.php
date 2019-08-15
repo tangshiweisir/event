@@ -24,14 +24,14 @@ class CourseController extends Controller
         foreach($data as $k=>$v){
             $data[$k]->arr=$res=DB::table('course_type')->where(['p_id'=>$v->course_type_id])->get();
         }
-        $dataInfo=DB::table('course')->where(['status'=>1,'is_pass'=>1])->simplePaginate(6);
+        $dataInfo=DB::table('course')->where(['status'=>1])->simplePaginate(6);
 
         return view('index/courselist',['data'=>$data,'dataInfo'=>$dataInfo]);
     }
 
     public function coursetypeshow(){
         $course_type_id=$_GET['course_type_id'];
-        $dataInfo=DB::table('course')->where(['status'=>1,'is_pass'=>1,'course_type_id'=>$course_type_id])->simplePaginate(6);
+        $dataInfo=DB::table('course')->where(['status'=>1,'course_type_id'=>$course_type_id])->simplePaginate(6);
 //        echo 111;die;
 //       var_dump($dataInfo);die;
         return  view('index/coursetypeshow',['dataInfo'=>$dataInfo]);
@@ -41,7 +41,7 @@ class CourseController extends Controller
      */
     public function courseDetail(){
         $course_id=$_GET['course_id'];
-        $data=DB::table('course')->where(['course_id'=>$course_id,'status'=>1,'is_pass'=>1])->first();
+        $data=DB::table('course')->where(['course_id'=>$course_id,'status'=>1])->first();
 //        var_dump($data);die;
         $t_id=$data->t_id;
         $dataInfo=DB::table('teacher')->where(['t_id'=>$t_id,'audit'=>1])->first();
