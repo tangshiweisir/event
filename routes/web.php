@@ -31,14 +31,6 @@ Route::any('/admin/teacher/login','admin\TecherAdminController@login');
 Route::any('/admin/teacher/loginOut','admin\TecherAdminController@loginOut');
 //讲师后台首页
 Route::get('/admin/techer/index','admin\TecherAdminController@index');
-//课程添加页面
-Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
-//课程添加页面
-Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
-//课程展示页面
-Route::get('/admin/user/courseList','admin\CourseController@courseList');
-//课程展示页面
-Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 
 //课程添加页面
 Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
@@ -46,22 +38,10 @@ Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
 Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
 //课程展示页面
 Route::get('/admin/user/courseList','admin\CourseController@courseList');
-<<<<<<< HEAD
 //留言展示页面
 Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 //留言审核
 Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
-=======
-//课程展示页面
-Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
-//课程展示页面
-Route::post('/admin/user/image','admin\CourseController@image');
-
->>>>>>> fa6f278fc950a4f79199047cca63aaace8f8ee99
-
-//视频添加
-Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
-Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
 
 //index
 //前台课程列表展示
@@ -116,8 +96,7 @@ Route::get('/admin/art/del','admin\ArtController@del');
 //资讯后台添加执行
 Route::post('/art/add_do','admin\ArtController@add_do');
 
-//shz 讲师后台回答问题，
-route::any('glteacher/reply','admin\\GLTeacherController@reply');
+
 
 
 //前台首页
