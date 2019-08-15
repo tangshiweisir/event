@@ -63,7 +63,6 @@ class TecherAdminController extends Controller
                 ];
             }
         }
-
     }
 
     //讲师登录退出
@@ -73,8 +72,12 @@ class TecherAdminController extends Controller
         header("refresh:2;url=/admin/teacher/login");
     }
 
-
-
+    //讲师退出
+    public function outlogin()
+    {
+       session(['t_id'=>""]);
+       return redirect('/admin/techer/index');
+    }
     //视频添加
     public function vliodcerate()
     {
@@ -82,7 +85,6 @@ class TecherAdminController extends Controller
 //        dd($data);
         return view('admin.teacher.volid.add',compact('data'));
     }
-
     public function vliodadd_do()
     {
         if (request()->hasfile('v_video')) {
@@ -171,5 +173,4 @@ class TecherAdminController extends Controller
 
         }
     }
-
 }
