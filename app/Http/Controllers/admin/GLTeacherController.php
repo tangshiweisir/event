@@ -26,20 +26,18 @@ class GLTeacherController extends Controller
             ->where('wen.status','=',1)
             ->get()
             ->toArray();
-        dd($arr);
         //根据讲师id把该讲师应该处理的问题分离出来
         $tree = [];
-        dd($arr);
         foreach($arr as $k=>$v){
             if($v['t_id'] == $t_id){
                 $tree[] = $v;
             }
         }
-        //根据课程把问题进行分类
-        $data = CourseModel::where('t_id',$t_id)->get()->toArray();
-        dd($tree);
-        dd($data);
-        return view('admin/teacher/showWen',['arr'=>$tree,'data'=>$data]);
+//        //根据课程把问题进行分类
+//        $data = CourseModel::where('t_id',$t_id)->get()->toArray();
+//        dd($tree);
+//        dd($data);
+        return view('admin/teacher/showWen',['arr'=>$tree]);
     }
 
 

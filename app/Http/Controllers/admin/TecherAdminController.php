@@ -85,11 +85,6 @@ class TecherAdminController extends Controller
 //        dd($data);
         return view('admin.teacher.volid.add',compact('data'));
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 180f277ea33178c8df09d4d9d292cb9e90139d1b
     public function vliodadd_do()
     {
         $data=request()->post();
