@@ -55,7 +55,6 @@ class CourseController extends Controller
         $course_id = $request->course_id;
         $arr=WenModel::where(['course_id'=>$course_id])
             ->join('user_index','user_index.user_id','=','wen.user_id')
-            ->where('wen.status','=',1)
             ->orderBy('wen.c_time','desc')
             ->get()
             ->toArray();
@@ -66,14 +65,15 @@ class CourseController extends Controller
                 $course_wen[] = $v;
             }
         }
-//        echo time();die;
-//        dd($course_wen);
-//        $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
-//            ->join('teacher','teacher.t_id','=','reply.t_id')
-//            ->get();
+        #这个老师回答这个课程下用户的提问
+        $teacherReply=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
+            ->join('teacher','teacher.t_id','=','reply.t_id')
+            ->join('course','course.course_id','=','wen.course_id')
+            ->get()
+            ->toArray();
         $user_id = session('user_id');
         $data = UserIndexModel::where('user_id', $user_id)->first();
-        return view('index/coursecont', ['arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id]);
+        return view('index/coursecont', ['teacherReply'=>$teacherReply,'arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id]);
     }
     /**
      * 个人中心
@@ -225,7 +225,7 @@ class CourseController extends Controller
         #用户表 问题表 课程表
         $arr=WenModel::join('user_index','user_index.user_id','=','wen.user_id')
             ->join('course','course.course_id','=','wen.course_id')
-            ->where('wen.status','=',1)
+//            ->where('wen.status','=',1)
             ->get()
             ->toArray();
 //        dd($arr);
