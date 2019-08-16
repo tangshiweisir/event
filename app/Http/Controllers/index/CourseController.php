@@ -60,6 +60,13 @@ class CourseController extends Controller
             ->get()
             ->toArray();
 //        dd($arr);
+        $arr1=LeavesWordModel::where(['course_id'=>$course_id])
+            ->join('user_index','user_index.user_id','=','leave_words.u_id')
+            ->where('leave_words.status','=',1)
+            ->get()
+            ->toArray();
+//        dd($arr1);
+
         $course_wen = [];
         foreach ($arr as $k=>$v){
             if($v['course_id'] == $course_id){
@@ -73,7 +80,7 @@ class CourseController extends Controller
 //            ->get();
         $user_id = session('user_id');
         $data = UserIndexModel::where('user_id', $user_id)->first();
-        return view('index/coursecont', ['arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id]);
+        return view('index/coursecont', ['arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id,'arr1'=>$arr1]);
     }
     /**
      * 个人中心
@@ -154,6 +161,8 @@ class CourseController extends Controller
      {
          return view('index/coursecont1');
      }
+
+
     //添加留言
     public function leaveMessage(Request $request)
     {
@@ -166,7 +175,7 @@ class CourseController extends Controller
             ];
             return  $request;
         }else{
-            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'period_id'=>1,'c_time'=>time()]);
+            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'course_id'=>1,'c_time'=>time()]);
             if($res){
                 $request=[
                     'code'=>2,
@@ -176,6 +185,20 @@ class CourseController extends Controller
             }
         }
     }
+
+    //留言展示
+    public function messageList()
+    {
+        $arr1=LeavesWordModel::join('user_index','user_index.user_id','=','leave_words.u_id')
+            ->join('course','course.course_id','=','leave_words.course_id')
+            ->where('leave_words.status','=',1)
+            ->get()
+            ->toArray();
+        dd($arr1);
+        return view('/index/coursecont',['arr1'=>$arr1]);
+    }
+
+
     //开始学习
      public function video()
      {

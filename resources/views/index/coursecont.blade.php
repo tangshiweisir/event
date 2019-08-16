@@ -172,20 +172,16 @@
                             <div class="clearh"></div>
                         </div>
                         <ul class="evalucourse">
+                            @foreach($arr1 as $k=>$v)
                             <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-                            <p class="pepname">候候候候</p>
-                            </span>
-                                <span class="pepcont"><p>2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013试真3年国家公。</p>
-                            <p class="peptime pswer">2015-01-02</p></span>
+                        	    <span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
+                                    <p class="pepname">{{$v['user_name']}}</p>
+                                </span>
+                                <span class="pepcont"><p>{{$v['l_contents']}}</p>
+                                <p class="peptime pswer">{{date("Y-m-d H:i",$v['c_time'])}}</p></span>
+
                             </li>
-                            <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-                            <p class="pepname">候候15kpiii</p>
-                            </span>
-                                <span class="pepcont"><p>2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公。</p>
-                            <p class="peptime pswer">2015-01-02</p></span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

@@ -59,6 +59,8 @@ Route::get('/index/coursecont','index\CourseController@coursecont')->middleware(
 Route::any('/index/video','index\CourseController@video');
 //添加留言
 Route::any('/index/leaveMessage','index\CourseController@leaveMessage');
+//留言展示
+Route::any('/index/messageList','index\CourseController@messageList');
 
 
 //个人中心
