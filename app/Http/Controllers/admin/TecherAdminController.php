@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\TeacherModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class TecherAdminController extends Controller
 {
@@ -114,5 +115,33 @@ class TecherAdminController extends Controller
             // print_r($store_result);exit();
         }
         exit('未获取到上传文件或上传过程出错');
+    }
+
+    public function vliodlist()
+    {
+        $data=DB::table('video')->get();
+        $data=json_encode($data);
+//        dd($data);
+        $data=json_decode($data,true);
+//        dd($data);
+        $course_id=[];
+        foreach ($data as $k=>$v){
+
+            $course_id[]=$v['course_id'];
+
+
+            $course_info=DB::table('course')->whereIn('course_id',$course_id)->get();
+
+            $course_info=json_encode($course_info);
+            $course_info=json_decode($course_info,true);
+            foreach ($course_info as $ka=>$va){
+                $data[$k]['course_name']=$va['course_name'];
+
+            }
+
+        }
+//        dd($data);
+
+        return view('admin/teacher/volid/v_list',compact('data'));
     }
 }

@@ -54,7 +54,7 @@
                     <a class="" href="javascript:;">视频管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/volid/create">视频添加</a></dd>
-                        <dd><a href="javascript:;">视频列表</a></dd>
+                        <dd><a href="/admin/voild/list">视频列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

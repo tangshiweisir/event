@@ -45,6 +45,7 @@ Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
 //视频添加
 Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
 Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
+Route::get('/admin/voild/list','admin\TecherAdminController@vliodlist');
 //index
 //前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');
