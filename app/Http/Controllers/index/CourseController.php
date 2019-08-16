@@ -253,7 +253,7 @@ class CourseController extends Controller
             ->get()
             ->toArray();
 
-        dd($arr);
+//        dd($arr);
         #问题表 教室表 课程表 回答表
 
 //        dd($arr);

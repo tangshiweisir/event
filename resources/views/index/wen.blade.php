@@ -42,7 +42,7 @@
                                     {{--{{$v['user_name']}}:--}}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {{$v['wen_content']}}
-                                    <hr>
+
                                 </span>
                             </div>
                             @foreach($arr2 as $kk=>$vv)
@@ -56,8 +56,11 @@
                                     <span id="qwe">
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {{$vv['r_content']}}
                                     </span>
+                                    <hr/>
                                 </div>
                                 @endif
                             @endforeach
