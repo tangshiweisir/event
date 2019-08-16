@@ -5,7 +5,7 @@
 @section('content')
     <div class="coursecont">
         <div class="coursepic">
-            <div class="course_img"><img src="images/c1.jpg" width="500"></div>
+            <div class="course_img"><img src="{{asset($data->course_img)}}" width="500"></div>
             <div class="coursetitle">
                 <a class="state">更新中</a>
                 <h2 class="courseh2">{{$data->course_name}}</h2>

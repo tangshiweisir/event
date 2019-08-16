@@ -15,7 +15,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">请选择课程</label>
                 <div class="layui-input-block">
-                    <select name="t_style" lay-verify="required">
+                    <select name="course_id" lay-verify="required">
                         <option value=""></option>
                         @foreach($data as $k=>$v)
                         <option value="{{$v->course_id}}">{{$v->course_name}}</option>

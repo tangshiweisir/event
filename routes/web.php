@@ -34,14 +34,24 @@ Route::get('/admin/techer/index','admin\TecherAdminController@index');
 
 //课程添加页面
 Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
-//课程添加页面
-Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
+//课程添加
+Route::post('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
 //课程展示页面
 Route::get('/admin/user/courseList','admin\CourseController@courseList');
+
 //留言展示页面
 Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 //留言审核
 Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
+//视频添加
+Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
+Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
+//课程广告展示
+Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
+//图片上传
+Route::post('/admin/user/image','admin\CourseController@image');
+//课程删除
+Route::post('/admin/user/courseDel','admin\CourseController@courseDel');
 
 //index
 //前台课程列表展示
@@ -59,6 +69,11 @@ Route::get('/index/coursecont','index\CourseController@coursecont')->middleware(
 Route::any('/index/video','index\CourseController@video');
 //添加留言
 Route::any('/index/leaveMessage','index\CourseController@leaveMessage');
+
+//留言展示
+Route::any('/index/messageList','index\CourseController@messageList');
+
+
 //个人中心
 Route::any('/index/mycourse','index\CourseController@mycourse')->middleware('normaluser');
 //修改用户信息
