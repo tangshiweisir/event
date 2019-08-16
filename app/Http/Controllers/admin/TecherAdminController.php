@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\ReplyModel;
 use App\Models\TeacherModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,11 +17,11 @@ class TecherAdminController extends Controller
             header("Refresh:2;url=/admin/teacher/login");
         }else{
             $teacherInfo = $_SESSION['teacherInfo'];
-
-            return view('admin/techerindex',['teacherInfo'=>$teacherInfo]);
+            $t_id = session('t_id');
+            $data =  TeacherModel::where('t_id',$t_id)->first();
+            return view('admin/techerindex',['teacherInfo'=>$teacherInfo,'data'=>$data]);
         }
     }
-
     //讲师登录
     public function login(Request $request){
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
@@ -64,14 +65,12 @@ class TecherAdminController extends Controller
             }
         }
     }
-
     //讲师登录退出
     public function loginOut(){
         session_start();
         unset($_SESSION['teacherInfo']);
         header("refresh:2;url=/admin/teacher/login");
     }
-
     //讲师退出
     public function outlogin()
     {
@@ -101,7 +100,6 @@ class TecherAdminController extends Controller
         }
 
     }
-
     public function upload($name)
     {
         if (request()->file($name)->isValid()) {
@@ -115,7 +113,7 @@ class TecherAdminController extends Controller
         }
         exit('未获取到上传文件或上传过程出错');
     }
-    
+
     
     
     
@@ -159,5 +157,13 @@ class TecherAdminController extends Controller
             echo "开启成功请您开启 OBS 进行直播";
             header("refresh:3;url=/admin/techer/index");
         }
+    }
+
+    //讲师基本资料
+    public function teacherZl(Request $request)
+    {
+        $t_id = session('t_id');
+        $data =  TeacherModel::where('t_id',$t_id)->first()->toArray();
+        return view('/admin/teacher/teacherzl',['data'=>$data]);
     }
 }
