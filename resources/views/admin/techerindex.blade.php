@@ -61,7 +61,7 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">个人中心</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/glteacher/reply">解决问题</a></dd>
+                        <dd><a href="/admin/t_open">开启直播</a></dd>
                         <dd><a href=""></a></dd>
                     </dl>
                 </li>

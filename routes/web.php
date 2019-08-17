@@ -45,6 +45,10 @@ Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessage
 Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
 //视频添加
 Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
+//开启直播
+Route::get('/admin/t_open','admin\TecherAdminController@t_open');
+Route::post('/admin/t_open/open_do','admin\TecherAdminController@open_do');
+//视频上传执行
 Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
 //课程广告展示
 Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
@@ -54,6 +58,9 @@ Route::post('/admin/user/image','admin\CourseController@image');
 Route::post('/admin/user/courseDel','admin\CourseController@courseDel');
 
 //index
+
+//前台直播
+Route::get('/index/open','index\OpenController@index');
 //前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');
 //课程分类下的课程列表

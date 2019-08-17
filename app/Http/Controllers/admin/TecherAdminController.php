@@ -113,7 +113,52 @@ class TecherAdminController extends Controller
         }
         exit('未获取到上传文件或上传过程出错');
     }
+
     
+    
+    
+    
+    
+    
+    //开启直播
+    public function t_open ()
+    {
+        session_start();
+        $info=$_SESSION['teacherInfo'];
+//        dd($info);
+        $t_id=\DB::table('teacher')->where(['t_name'=>$info['t_name']])->select('t_id')->first();
+        $t_info=\DB::table('open')->where(['t_id'=>$t_id->t_id])->first();
+        $t_id=$t_id->t_id;
+        if(empty($t_info)){;
+        $data=time();
+        $str='123123';
+        $str1=$data.$str;
+        $str1=str_shuffle($str1);
+        $str1=substr($str1,'3','8');
+        $open_info=[
+            't_id'=>$t_id->t_id,
+            'o_num'=>$str1,
+            'c_time'=>time(),
+            'status'=>2
+        ];
+        \DB::table('open')->insert($open_info);
+        }else{
+        $str1=$t_info->o_num;
+        }
+        return view('admin/teacher/open/add',compact('str1','t_id'));
+    }
+    //直播开启执行
+    public function open_do()
+    {
+        $t_id=request()->post('t_id');
+
+        $res=\DB::table('open')->where(['t_id'=>$t_id])->update(['status'=>1]);
+        if($res!==false){
+            echo "开启成功请您开启 OBS 进行直播";
+            header("refresh:3;url=/admin/techer/index");
+        }
+    }
+
     //讲师基本资料
     public function teacherZl(Request $request)
     {
@@ -121,5 +166,4 @@ class TecherAdminController extends Controller
         $data =  TeacherModel::where('t_id',$t_id)->first()->toArray();
         return view('/admin/teacher/teacherzl',['data'=>$data]);
     }
-    
 }
