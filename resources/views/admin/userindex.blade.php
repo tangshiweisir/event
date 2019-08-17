@@ -63,6 +63,9 @@
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/user/courseAdd">课程添加</a></dd>
                         <dd><a href="/admin/user/courseList">课程列表</a></dd>
+                        <dd><a href="/admin/user/section">课章添加</a></dd>
+                        <dd><a href="/admin/user/lesson">课节添加</a></dd>
+                        <dd><a href="/admin/user/hour">课时添加</a></dd>
                         <dd><a href="/admin/user/coursemessageList">留言展示</a></dd>
                     </dl>
                 </li>
