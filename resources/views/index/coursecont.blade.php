@@ -85,7 +85,10 @@
 <div class="coursecont">
     <div class="coursepic1">
         <div class="coursetitle1">
-            <h2 class="courseh21">会计财经法规与会计职业道德</h2>
+            <h2 class="courseh21">
+                会计财经法规与会计职业道德
+                {{--<button style="background-color: #6ce26c;border:1px solid red;width:50px;">live</button>--}}
+            </h2>
             <div  style="margin-top:-40px;margin-right:25px;float:right;">
                 <div class="bdsharebuttonbox">
                     <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
@@ -172,20 +175,16 @@
                             <div class="clearh"></div>
                         </div>
                         <ul class="evalucourse">
+                            @foreach($arr1 as $k=>$v)
                             <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-                            <p class="pepname">候候候候</p>
-                            </span>
-                                <span class="pepcont"><p>2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013试真3年国家公。</p>
-                            <p class="peptime pswer">2015-01-02</p></span>
+                        	    <span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
+                                    <p class="pepname">{{$v['user_name']}}</p>
+                                </span>
+                                <span class="pepcont"><p>{{$v['l_contents']}}</p>
+                                <p class="peptime pswer">{{date("Y-m-d H:i",$v['c_time'])}}</p></span>
+
                             </li>
-                            <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-                            <p class="pepname">候候15kpiii</p>
-                            </span>
-                                <span class="pepcont"><p>2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公。</p>
-                            <p class="peptime pswer">2015-01-02</p></span>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -200,12 +199,20 @@
                         <ul class="evalucourse">
                             @foreach($arr as $k=>$v)
                                 <li>
-                                <span class="pephead"><img src="images/0-0.JPG" width="50" title="">
-                                <p class="pepname">{{$data['user_name']}}</p>
+                                    <span class="pephead"><img src="images/0-0.JPG" width="50" title="">
+
                                 </span>
                                     <span class="pepcont">
                                 <p><a href="#" class="peptitle" target="_blank">{{$v['wen_content']}}</a></p>
+
                                 <p class="peptime pswer">{{date("Y-m-d H:i",$v['c_time'])}}</p>
+                                    @foreach($teacherReply as $tr_key=>$tr_val)
+                                            @if($tr_val['wen_id'] == $v['wen_id'])
+                                        <span class="pepname">{{$tr_val['t_name']}}</span>：
+                                        <span>回答：</span>
+                                        <span class="pepname">{{$tr_val['r_content']}}</span>
+                                            @endif
+                                    @endforeach
                                 </span>
                                 </li>
                             @endforeach
@@ -224,9 +231,6 @@
                             <li>
                                 <p class="mbm mem_not"><a href="#" class="peptitle">资料.rar</a></p>
                                 <p class="gray"><b class="coclass">课时：<a href="#" target="_blank">会计的概念与目标2</a></b><b class="cotime">上传时间：<b class="coclass" >2015-05-8</b></b></p>
-
-
-
                             </li>
                         </ul>
 

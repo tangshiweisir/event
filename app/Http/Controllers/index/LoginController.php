@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\index;
 
+use App\Models\UserIndexModel;
+use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -103,9 +105,69 @@ class LoginController extends Controller
     /**
      * @content 退出登录
      * */
-    public function logout()
+    public function logout(Request $request)
     {
-        session(['user_id'=>""]);
+        $request->session()->forget('user_id');
+        $request->session()->forget('user_name');
         return redirect('/index/index');
+    }
+
+    /**
+     * 微博授权页面
+     */
+
+    public function callback(Request $request)
+    {
+        set_time_limit(0);
+        $code = $request->code;
+        $url = "https://api.weibo.com/oauth2/access_token?client_id=305250602&client_secret=5029705c7d70dfcc82f07aaf395008b3&grant_type=authorization_code&redirect_uri=http://www.shop.cn/index/callback&code=".$code;
+        $data = $this->curl($url);
+        //获取微博登陆用户的信息
+        $userInfo=json_decode($data,true);
+        $token = $userInfo['access_token'];
+        $uid = $userInfo['uid'];
+//        dd($userInfo);
+        $urla="https://api.weibo.com/2/users/show.json?access_token=$token&uid=$uid";
+//        dd($urla);
+//        $uu = $this->curl($urla);
+        $uu = file_get_contents($urla);
+        $user = json_decode($uu,true);
+        $user_name = $user['screen_name'];
+        $data = [
+            'user_name'=>$user_name,
+            'token'=>$token,
+            'ctime'=>time()
+        ];
+        $res = UserIndexModel::insert($data);
+        $res1=UserIndexModel::where('user_name',$user_name)->first();
+
+        if($res){
+            session(['user_id'=>$res1->user_id,'user_name'=>$res1->user_name]);
+            echo "<script>alert('登陆成功');location.href='/index/index'</script>";
+        }else{
+            echo "<script>alert('登录失败，请重新登陆');location.href='/index/login'</script>";
+        }
+    }
+
+    protected function curl($url)
+    {
+        //curl初始化
+        $curl = curl_init();
+        //设置抓取的url
+        curl_setopt($curl, CURLOPT_URL, $url);
+        //设置头文件的信息作为数据流输出
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        //设置获取的信息以文件流的形式返回，而不是直接输出。
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYPEER,FALSE);
+        curl_setopt($curl,CURLOPT_SSL_VERIFYHOST,FALSE);
+        //设置post方式提交
+        curl_setopt($curl, CURLOPT_POST, 1);
+        //执行命令
+        $data = curl_exec($curl);
+        //关闭URL请求
+        curl_close($curl);
+        //显示获得的数据
+        return $data;
     }
 }

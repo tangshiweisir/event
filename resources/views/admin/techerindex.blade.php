@@ -6,6 +6,7 @@
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <script src="/layui/layui.js"></script>
+    <script src="/js/jq.js"></script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -29,10 +30,10 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                    {{$data['t_name']}}
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="/admin/teacher/teacherzl">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
@@ -60,7 +61,7 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">个人中心</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/glteacher/reply">解决问题</a></dd>
+                        <dd><a href="/admin/t_open">开启直播</a></dd>
                         <dd><a href=""></a></dd>
                     </dl>
                 </li>

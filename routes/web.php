@@ -34,19 +34,37 @@ Route::get('/admin/techer/index','admin\TecherAdminController@index');
 
 //课程添加页面
 Route::get('/admin/user/courseAdd','admin\CourseController@courseAdd');
-//课程添加页面
-Route::get('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
+//课程添加
+Route::post('/admin/user/courseAddDo','admin\CourseController@courseAddDo');
 //课程展示页面
 Route::get('/admin/user/courseList','admin\CourseController@courseList');
+
 //留言展示页面
 Route::any('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
 //留言审核
 Route::any('/admin/user/aduitMessage','admin\CourseController@aduitMessage');
 //视频添加
 Route::get('/admin/volid/create','admin\TecherAdminController@vliodcerate');
+//开启直播
+Route::get('/admin/t_open','admin\TecherAdminController@t_open');
+Route::post('/admin/t_open/open_do','admin\TecherAdminController@open_do');
+//视频上传执行
 Route::post('/admin/volid/vliodadd_do','admin\TecherAdminController@vliodadd_do');
+
 Route::get('/admin/voild/list','admin\TecherAdminController@vliodlist');
+
+//课程广告展示
+Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessageList');
+//图片上传
+Route::post('/admin/user/image','admin\CourseController@image');
+//课程删除
+Route::post('/admin/user/courseDel','admin\CourseController@courseDel');
+
+
 //index
+
+//前台直播
+Route::get('/index/open','index\OpenController@index');
 //前台课程列表展示
 Route::get('/index/courselist','index\CourseController@courseList');
 //课程分类下的课程列表
@@ -62,6 +80,9 @@ Route::get('/index/coursecont','index\CourseController@coursecont')->middleware(
 Route::any('/index/video','index\CourseController@video');
 //添加留言
 Route::any('/index/leaveMessage','index\CourseController@leaveMessage');
+
+//留言展示
+Route::any('/index/messageList','index\CourseController@messageList');
 
 
 //个人中心
@@ -101,12 +122,17 @@ Route::post('/art/add_do','admin\ArtController@add_do');
 
 
 //shz 讲师后台回答问题，
-route::any('/glteacher/reply','admin\\GLTeacherController@reply');
+route::any('/glteacher/reply','admin\GLTeacherController@reply');
+
+route::any("/glteacher/replywen",'admin\GLTeacherController@replyWen');
+
+route::any("/admin/teacher/teacherzl",'admin\TecherAdminController@teacherZl');
 
 //前台首页
 Route::any('/index/index','index\IndexController@index');
 //前台登录页面
 Route::any('/index/login','index\LoginController@login');
+Route::any('/index/callback','index\LoginController@callback');
 //前台登录
 Route::any('/index/loginDo','index\LoginController@loginDo');
 //退出登录
@@ -125,3 +151,4 @@ Route::any('/index/codecheck','index\PasswordController@codecheck');
 Route::any('/index/password','index\PasswordController@password');
 //修改密码
 Route::any('/index/passwordDo','index\PasswordController@passwordDo');
+
