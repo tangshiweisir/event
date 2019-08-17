@@ -56,6 +56,18 @@ Route::get('/admin/user/coursemessageList','admin\CourseController@coursemessage
 Route::post('/admin/user/image','admin\CourseController@image');
 //课程删除
 Route::post('/admin/user/courseDel','admin\CourseController@courseDel');
+//课程课章添加页面
+Route::get('/admin/user/section','admin\CourseController@section');
+//课程课章添加
+Route::post('/admin/user/sectionAdd','admin\CourseController@sectionAdd');
+//课程课节添加页面
+Route::get('/admin/user/lesson','admin\CourseController@lesson');
+//课程课节添加
+Route::post('/admin/user/lessonAdd','admin\CourseController@lessonAdd');
+//课程课时添加页面
+Route::get('/admin/user/hour','admin\CourseController@hour');
+//课程课时添加
+Route::post('/admin/user/hourAdd','admin\CourseController@hourAdd');
 
 //index
 
@@ -67,8 +79,6 @@ Route::get('/index/courselist','index\CourseController@courseList');
 Route::get('/index/coursetypeshow','index\CourseController@coursetypeshow');
 //进入课程详情
 Route::get('/index/courseDetail','index\CourseController@courseDetail');
-
-Route::any('/index/courselist','index\CourseController@courseList');
 Route::any('/index/index/typeGetCourse','index\IndexController@typeGetCourse');
 //课程加入学习
 Route::get('/index/coursecont','index\CourseController@coursecont')->middleware('normaluser');
