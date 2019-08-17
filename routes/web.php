@@ -119,6 +119,8 @@ Route::post('/art/add_do','admin\ArtController@add_do');
 
 //shz 讲师后台回答问题，
 route::any('/glteacher/reply','admin\GLTeacherController@reply');
+//退出
+route::any('/glteacher/logouted','admin\TecherAdminController@logouted');
 
 route::any("/glteacher/replywen",'admin\GLTeacherController@replyWen');
 

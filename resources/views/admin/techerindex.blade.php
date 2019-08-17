@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <script src="/layui/layui.js"></script>
     <script src="/js/jq.js"></script>
@@ -30,14 +30,14 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    {{$data['t_name']}}
+                    {{$teacherInfo['t_name']}}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="/admin/teacher/teacherzl">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="/admin/teacher/loginOut">退了</a></li>
+            <li class="layui-nav-item"><a href="/glteacher/logouted">退了</a></li>
         </ul>
     </div>
 
@@ -54,7 +54,7 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">视频管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/admin/volid/create">视频添加</a></dd>
+                        <dd><a href="{{url('/admin/volid/create')}}">视频添加</a></dd>
                         <dd><a href="javascript:;">视频列表</a></dd>
                     </dl>
                 </li>
