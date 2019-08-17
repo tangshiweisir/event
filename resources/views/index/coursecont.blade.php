@@ -85,14 +85,11 @@
 <div class="coursecont">
     <div class="coursepic1">
         <div class="coursetitle1">
-<<<<<<< HEAD
             <h2 class="courseh21">
                 会计财经法规与会计职业道德
                 {{--<button style="background-color: #6ce26c;border:1px solid red;width:50px;">live</button>--}}
             </h2>
-=======
-            <h2 class="courseh21">{{$course->course_name}}</h2>
->>>>>>> zcy
+           <h2 class="courseh21">{{$course->course_name}}</h2>
             <div  style="margin-top:-40px;margin-right:25px;float:right;">
                 <div class="bdsharebuttonbox">
                     <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>

@@ -80,10 +80,6 @@ class CourseController extends Controller
         $user_id = session('user_id');
         $data = UserIndexModel::where('user_id', $user_id)->first();
 
-        return view('index/coursecont', ['teacherReply'=>$teacherReply,'arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id,'arr1'=>$arr1]);
-
-        $user_id = session('user_id');
-        $data = UserIndexModel::where('user_id', $user_id)->first();
         //课程信息
         $course=DB::table('course')->where(['course_id'=>$course_id,'status'=>1])->first();
         $t_id=$course->t_id;
@@ -98,8 +94,7 @@ class CourseController extends Controller
             $res[$kk]->arr=$arr;
            }
         }
-        // var_dump($section);die;
-        return view('index/coursecont', ['arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id,'course'=>$course,'teacher'=>$teacher,'section'=>$section]);
+        return view('index/coursecont', ['teacherReply'=>$teacherReply,'arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id,'arr1'=>$arr1,'course'=>$course,'teacher'=>$teacher,'section'=>$section]);
     }
     /**
      * 个人中心
@@ -175,16 +170,6 @@ class CourseController extends Controller
         }
 
     }
-<<<<<<< HEAD
-     //课程详情
-    public function coursecont1()
-     {
-         return view('index/coursecont1');
-     }
-
-
-=======
->>>>>>> zcy
     //添加留言
     public function leaveMessage(Request $request)
     {
