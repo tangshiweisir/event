@@ -38,6 +38,7 @@
 		<ul class="nag">
 			<li><a href="{{url('/index/courselist')}}" class="link1">课程</a></li>
 			<li><a href="{{url('/index/articlelist')}}" class="link1">资讯</a></li>
+			<li><a href="{{url('/index/open')}}" class="link1">直播</a></li>
 			<li><a href="{{url('/index/teacherlist')}}" class="link1">讲师</a></li>
 			<li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
 			<li><a href="{{url('/index/wen')}}" class="link1" target="_blank">问答</a></li>
@@ -52,14 +53,14 @@
 					<a href="{{url('index/mycourse')}}"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">{{$user_info['user_name']}}</a>
 					<span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
 						<span style="background:#fff;">
-							<a href="{{url('index/mycourse')}}" style="width:70px; display:block;" class="link2 he ico" target="_blank">{{$user_info['user_name']}}</a>
+
+							<a href="{{url('index/mycourse')}}" style="width:70px; display:block;" class="link2 he ico" target="_blank">{{session('user_name')}}</a>
 						</span>
 						<div class="clearh"></div>
 						<ul class="logmine" >
-							<li><a class="link1" href="#">我的课程</a></li>
-							<li><a class="link1" href="#">我的题库</a></li>
-							<li><a class="link1" href="#">我的问答</a></li>
-							<li><a class="link1" href="#">退出</a></li>
+							<li><a class="link1" href="{{url('index/mycourse')}}">我的课程</a></li>
+							<li><a class="link1" href="{{url('index/wen')}}">我的问答</a></li>
+							<li><a class="link1" href="/index/logout">退出</a></li>
 						</ul>
 					</span>
 				@endif

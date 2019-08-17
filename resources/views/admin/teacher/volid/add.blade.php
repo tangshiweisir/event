@@ -3,7 +3,6 @@
     视频添加
 @endsection
 @section('content')
-
         <form class="layui-form" action="/admin/volid/vliodadd_do" method="post" style="margin-top: 20px;" enctype="multipart/form-data">
             <div class="layui-form-item">
                 <label class="layui-form-label">视频名称</label>

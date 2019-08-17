@@ -20,8 +20,6 @@
                 <li><a class="mb1" href="{{url('index/mycourse')}}">我的课程</a></li>
                 <li  class="currnav"><a class="mb3" href="{{url('index/wen')}}">我的问答</a></li>
                 <li><a class="mb4" href="{{url('index/meword')}}">我的笔记</a></li>
-                <li><a class="mb12" href="myhomework.html">我的作业</a></li>
-                <li><a class="mb2" href="training_list.html" target="_blank">我的题库</a></li>
                 <li><a class="mb5" href="{{url('index/logout')}}">退出登录</a></li>
             </ul>
         </div>
@@ -42,7 +40,7 @@
                                     {{--{{$v['user_name']}}:--}}
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     {{$v['wen_content']}}
-                                    <hr>
+
                                 </span>
                             </div>
                             @foreach($arr2 as $kk=>$vv)
@@ -56,8 +54,11 @@
                                     <span id="qwe">
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         {{$vv['r_content']}}
                                     </span>
+                                    <hr/>
                                 </div>
                                 @endif
                             @endforeach

@@ -22,17 +22,20 @@ class IndexController extends Controller
 //        dd($course);
         $user_id = session('user_id');
 
+        $user_name = session(['user_name']);
+        if (empty($user_id)){
+            echo "<script>alert('请先登录');location.href='/index/login'</script>";
+        }
         if($user_id){
             $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
         }else{
             $user_info = "";
         }
-
-        if (empty($user_id)){
-            echo "<script>alert('请先登录');location.href='/index/login'</script>";
-        }
-        $user_info = UserIndexModel::where(['user_id'=>$user_id])->first()->toArray();
-        return view('index/index',compact('courseType','course','user_info','user_info'));
+        return view('index/index',compact(
+            'courseType','course',
+            'user_info','user_info',
+            'user_name','user_name'
+        ));
     }
 
     //根据课程分类ID获取课程

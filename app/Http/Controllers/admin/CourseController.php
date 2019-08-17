@@ -16,13 +16,12 @@ class CourseController extends Controller
     $teacher=$this->teacher();
    return view('admin/course/courseadd',['data'=>$data,'teacher'=>$teacher]);
   }
-
-
-    //留言展示页面
-    public function coursemessageList(){
+  //留言展示页面
+  public function coursemessageList(){
         $data = LeavesWordModel::select()->orderBy('l_id','desc')->get();
         return view('admin/course/coursemessageList',['data'=>$data]);
-    }
+  }  
+  //课程分类数据
   public function course_type(){
       $data=DB::table('course_type')->where(['status'=>1,'p_id'=>0])->get();
       foreach($data as $k=>$v){
@@ -31,6 +30,7 @@ class CourseController extends Controller
       }
       return $data;
   }
+  //讲师数据
   public function teacher(){
     $teacher=DB::table('teacher')->where(['audit'=>1])->get();
     return $teacher;
@@ -96,7 +96,7 @@ class CourseController extends Controller
       }
       return json_encode($arr);
   }
- //课程展示页面
+  //课程展示页面
   public function courseList(){
     $data = DB::table('course')->join("course_type","course_type.course_type_id","=","course.course_type_id")
             ->join("teacher","teacher.t_id","=","course.t_id")
@@ -104,8 +104,8 @@ class CourseController extends Controller
         // var_dump($data);die;  
     return view('admin/course/courselist',['data'=>$data]);
   }
-   //课程删除（軟删）
-   public function courseDel(){
+  //课程删除（軟删）
+  public function courseDel(){
     $course_id=$_POST['course_id'];
     $data=DB::table('course')->where(['course_id'=>$course_id])->update(['status'=>2]);
     if($data){
@@ -123,8 +123,85 @@ class CourseController extends Controller
     
   }
 
-    public function aduitMessage(Request $request)
-    {
+  //课程课章添加页面
+  public function section(){
+    $data=DB::table('course')->where(['status'=>1])->get();
+    return view('admin/course/coursesection',['data'=>$data]);
+  }
+  //课程课章添加
+  public function sectionAdd(Request $request){
+    $data=$request->input();
+    $res=DB::table('course_section')->insert($data);
+    if($res){
+      $arr=[
+        'code'=>1,
+        'msg'=>'添加课章成功'
+      ];
+    }else{
+      $arr=[
+        'code'=>0,
+        'msg'=>'添加课章失败'
+      ];
+    }
+    return json_encode($arr);
+  }
+  //课程课节添加页面
+  public function lesson(){
+    $data=DB::table('course_section')->where(['status'=>1])->get();
+    return view('admin/course/courselesson',['data'=>$data]);
+  }
+  //课程课节添加
+  public function lessonAdd(Request $request){
+    $data=$request->input();
+    $res=DB::table('course_lesson')->insert($data);
+    if($res){
+      $arr=[
+        'code'=>1,
+        'msg'=>'添加课节成功'
+      ];
+    }else{
+      $arr=[
+        'code'=>0,
+        'msg'=>'添加课节失败'
+      ];
+    }
+    return json_encode($arr);
+  }
+
+  //课程课时添加页面
+  public function hour(){
+    $data=DB::table('course_lesson')->where(['status'=>1])->get();
+    // var_dump($data);die;
+    return view('admin/course/coursehour',['data'=>$data]);
+  }
+  
+  //课程课时添加
+  public function hourAdd(Request $request){
+    $data=$request->input();
+    $res=DB::table('course_hour')->insert($data);
+    if($res){
+      $arr=[
+        'code'=>1,
+        'msg'=>'添加课时成功'
+      ];
+    }else{
+      $arr=[
+        'code'=>0,
+        'msg'=>'添加课节失败'
+      ];
+    }
+    return json_encode($arr);
+  
+      
+  }
+
+
+
+
+
+
+  //评论
+  public function aduitMessage(Request $request){
         if($request->isMethod('post') || $request->isMethod('ajax')){
             $l_id = $request->l_id ?? "";
             $type = $request->type ?? ""; //1为通过  2为不通过
@@ -148,5 +225,5 @@ class CourseController extends Controller
             $data = LeavesWordModel::where(['status'=>2])->orderBy('l_id','desc')->get();
             return view('admin/course/coursemessageList',['data'=>$data]);
         }
-    }
+  }
 }

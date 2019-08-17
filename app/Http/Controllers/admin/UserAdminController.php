@@ -81,7 +81,9 @@ class UserAdminController extends Controller
     //讲师添加
     public function teacherCreate(Request $request){
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
-            return view('admin/teacher/teacherCreate');
+            session_start();
+            $teacherInfo = $_SESSION['teacherInfo'];
+            return view('admin/teacher/teacherCreate',['teacherInfo'=>$teacherInfo]);
         }elseif($_SERVER['REQUEST_METHOD'] == 'POST'){
             $createData = $request->post();
             $createData['audit']=2;

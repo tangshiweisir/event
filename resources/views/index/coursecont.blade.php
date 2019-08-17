@@ -85,7 +85,11 @@
 <div class="coursecont">
     <div class="coursepic1">
         <div class="coursetitle1">
-            <h2 class="courseh21">会计财经法规与会计职业道德</h2>
+            <h2 class="courseh21">
+                会计财经法规与会计职业道德
+                {{--<button style="background-color: #6ce26c;border:1px solid red;width:50px;">live</button>--}}
+            </h2>
+           <h2 class="courseh21">{{$course->course_name}}</h2>
             <div  style="margin-top:-40px;margin-right:25px;float:right;">
                 <div class="bdsharebuttonbox">
                     <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
@@ -102,12 +106,12 @@
             </div>
         </div>
         <div class="course_img1">
-            <img src="images/c1.jpg" height="140">
+            <img src="{{asset($course->course_img)}}" height="140">
         </div>
         <div class="course_xq">
-            <span class="courstime1"><p>课时<br/><span class="coursxq_num">100课时</span></p></span>
-            <span class="courstime1"><p>学习人数<br/><span class="coursxq_num">25987人</span></p></span>
-            <span class="courstime1"><p style="border:none;">课程时长<br/><span class="coursxq_num">3小时20分</span></p></span>
+            <span class="courstime1"><p>课时<br/><span class="coursxq_num">{{$course->course_hour}}课时</span></p></span>
+            <span class="courstime1"><p>学习人数<br/><span class="coursxq_num">{{$course->start_people}}人</span></p></span>
+            <span class="courstime1"><p style="border:none;">课程时长<br/><span class="coursxq_num">{{$course->hour_duration}}分</span></p></span>
         </div>
         <div class="course_xq2">
             <a class="course_learn" href="{{url('/index/video')}}">开始学习</a>
@@ -128,28 +132,22 @@
             <div class="tab_box">
                 <div>
                     <dl class="mulu noo">
+                    @foreach($section as $k=>$v)
                         <div>
-                            <dt class="mulu_title"><span class="mulu_img"></span>第一章&nbsp;&nbsp;总论
+                            <dt class="mulu_title"><span class="mulu_img"></span>第{{$k+1}}章&nbsp;&nbsp;{{$v->section_name}}
                                 <span class="mulu_zd">+</span></dt>
+                               
                             <div class="mulu_con">
-                                <dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                                <a href="video.html"><dd><strong class="cataloglink">课时1：会计的概念与目标1</strong><i class="fini nn"></i></dd></a>
-                                <a href="video.html"><dd><strong class="cataloglink">课时2：会计的概念与目标2</strong><i class="fini fn"></i></dd></a>
-                                <dd class="smalltitle"><strong>第二节&nbsp;&nbsp;会计的职能与方法</strong></dd>
-                                <a href="video.html"><dd><strong class="cataloglink">课时1：会计的职能与方法1</strong><i class="fini nn"></i></dd></a>
-                                <a href="video.html"><dd><strong class="cataloglink">课时2：会计的职能与方法2</strong><i class="fini fn"></i></dd></a>
-                                <a href="video.html"><dd><strong class="cataloglink">课时1：会计的职能与方法3</strong><i class="fini ff"></i></dd></a>
+                            @foreach($v->arr as $kk=>$vv)
+                                <dd class="smalltitle"><strong>第{{$kk+1}}节&nbsp;&nbsp;{{$vv->lesson_name}}</strong></dd>
+                                @foreach($vv->arr as $kkk=>$vvv)
+                                <a href="/index/open"><dd><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv->hour_name}}</strong><i class="fini nn"></i></dd></a>
+                                @endforeach
+                            @endforeach
                             </div>
+                           
                         </div>
-                        <div>
-                            <dt class="mulu_title"><span class="mulu_img"></span>第二章&nbsp;&nbsp;会计要素与会计等式
-                                <span class="mulu_zd">+</span></dt>
-                            <div class="mulu_con">
-                                <dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计要素</strong></dd>
-                                <a href="video.html"><dd><strong class="cataloglink">课时1：会计要素与会计等式1</strong><i class="fini nn"></i></dd></a>
-                                <a href="video.html"><dd><strong class="cataloglink">课时2：会计要素与会计等式2</strong><i class="fini nn"></i></dd></a>
-                            </div>
-                        </div>
+                        @endforeach
                     </dl>
                 </div>
                 <div class="hide">
@@ -196,12 +194,20 @@
                         <ul class="evalucourse">
                             @foreach($arr as $k=>$v)
                                 <li>
-                                <span class="pephead"><img src="images/0-0.JPG" width="50" title="">
-                                <p class="pepname">{{$data['user_name']}}</p>
+                                    <span class="pephead"><img src="images/0-0.JPG" width="50" title="">
+
                                 </span>
                                     <span class="pepcont">
                                 <p><a href="#" class="peptitle" target="_blank">{{$v['wen_content']}}</a></p>
+
                                 <p class="peptime pswer">{{date("Y-m-d H:i",$v['c_time'])}}</p>
+                                    @foreach($teacherReply as $tr_key=>$tr_val)
+                                            @if($tr_val['wen_id'] == $v['wen_id'])
+                                        <span class="pepname">{{$tr_val['t_name']}}</span>：
+                                        <span>回答：</span>
+                                        <span class="pepname">{{$tr_val['r_content']}}</span>
+                                            @endif
+                                    @endforeach
                                 </span>
                                 </li>
                             @endforeach
@@ -220,9 +226,6 @@
                             <li>
                                 <p class="mbm mem_not"><a href="#" class="peptitle">资料.rar</a></p>
                                 <p class="gray"><b class="coclass">课时：<a href="#" target="_blank">会计的概念与目标2</a></b><b class="cotime">上传时间：<b class="coclass" >2015-05-8</b></b></p>
-
-
-
                             </li>
                         </ul>
 
@@ -241,10 +244,10 @@
                 <div class="teacher">
                     <div class="teapic ppi">
                         <a href="{{url('/index/teacher')}}" target="_blank"><img src="images/teacher.png" width="80" class="teapicy" title="张民智"></a>
-                        <h3 class="tname"><a href="{{url('/index/teacher')}}" class="peptitle" target="_blank">张民智</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
+                        <h3 class="tname"><a href="{{url('/index/teacher')}}" class="peptitle" target="_blank">{{$teacher->t_name}}</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
                     </div>
                     <div class="clearh"></div>
-                    <p>十年以上Linux从业经验， 培训经验超过八年。在各 个知名培训机构做过金牌 讲师、学科负责人，培训 学员过万人。曾获红帽认 证讲师，微软认证讲师等 资质认证。教学以逻辑性 强、教学细致、知识点准 确著称。</p>
+                    <p>{{$teacher->t_desc}}</p>
                 </div>
             </div>
         </div>

@@ -33,32 +33,6 @@
             <li><a href="/index/wen" class="link1" target="_blank">问答</a></li>
 
         </ul>
-        <span class="massage">
-        	<!--未登录-->
-            {{--@if(session('user_id')=="")--}}
-        	{{--<span class="exambtn_lore">--}}
-                 {{--<a class="tkbtn tklog" href="{{url('/index/login')}}">登录</a>--}}
-                 {{--<a class="tkbtn tkreg" href="{{url('/index/register')}}">注册</a>--}}
-            {{--</span>--}}
-                {{--@else--}}
-                {{--<div class="logined">--}}
-                {{--<a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>--}}
-                {{--<span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">--}}
-                    {{--<span style="background:#fff;">--}}
-                        {{--<a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>--}}
-                    {{--</span>--}}
-                    {{--<div class="clearh"></div>--}}
-                    {{--<ul class="logmine" >--}}
-                        {{--<li><a class="link1" href="#">我的课程</a></li>--}}
-                        {{--<li><a class="link1" href="#">我的题库</a></li>--}}
-                        {{--<li><a class="link1" href="#">我的问答</a></li>--}}
-                        {{--<li><a class="link1" href="{{url('index/logout')}}">退出</a></li>--}}
-                    {{--</ul>--}}
-                {{--</span>--}}
-            {{--</div>--}}
-            {{--@endif--}}
-
-        </span>
     </div>
 </div>
 

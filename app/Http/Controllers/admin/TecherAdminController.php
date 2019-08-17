@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\ReplyModel;
 use App\Models\TeacherModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,11 +17,13 @@ class TecherAdminController extends Controller
             header("Refresh:2;url=/admin/teacher/login");
         }else{
             $teacherInfo = $_SESSION['teacherInfo'];
-
-            return view('admin/techerindex',['teacherInfo'=>$teacherInfo]);
+//            dd($teacherInfo);
+            $t_id = session('t_id');
+            $teat =  TeacherModel::where('t_id',$t_id)->first();
+//            dd($ttt);
+            return view('admin/techerindex',['teacherInfo'=>$teacherInfo,'teat'=>$teat]);
         }
     }
-
     //讲师登录
     public function login(Request $request){
         if($_SERVER['REQUEST_METHOD'] == 'GET'){
@@ -64,29 +67,40 @@ class TecherAdminController extends Controller
             }
         }
     }
-
     //讲师登录退出
     public function loginOut(){
         session_start();
         unset($_SESSION['teacherInfo']);
         header("refresh:2;url=/admin/teacher/login");
     }
-
     //讲师退出
     public function outlogin()
     {
        session(['t_id'=>""]);
        return redirect('/admin/techer/index');
     }
+    /**
+     * @content 退出登录
+     * */
+    public function logouted(Request $request)
+    {
+        $request->session()->forget('teacherInfo');
+        $request->session()->forget('t_id');
+        return redirect('/admin/techer/index');
+    }
     //视频添加
     public function vliodcerate()
     {
         $data=\DB::table('course')->get();
 //        dd($data);
-        return view('admin.teacher.volid.add',compact('data'));
+        session_start();
+        $teacherInfo = $_SESSION['teacherInfo'];
+        return view('admin.teacher.volid.add',compact('data','data','teacherInfo','teacherInfo'));
     }
     public function vliodadd_do()
     {
+        session_start();
+        $teacherInfo = $_SESSION['teacherInfo'];
         $data=request()->post();
         if (request()->hasfile('v_video')) {
             $data['v_video'] = $this->upload('v_video');
@@ -101,7 +115,6 @@ class TecherAdminController extends Controller
         }
 
     }
-
     public function upload($name)
     {
         if (request()->file($name)->isValid()) {
@@ -114,5 +127,52 @@ class TecherAdminController extends Controller
             // print_r($store_result);exit();
         }
         exit('未获取到上传文件或上传过程出错');
+    }
+    
+    //开启直播
+    public function t_open ()
+    {
+        session_start();
+        $info=$_SESSION['teacherInfo'];
+//        dd($info);
+        $t_id=\DB::table('teacher')->where(['t_name'=>$info['t_name']])->select('t_id')->first();
+        $t_info=\DB::table('open')->where(['t_id'=>$t_id->t_id])->first();
+        $t_id=$t_id->t_id;
+        if(empty($t_info)){;
+        $data=time();
+        $str='123123';
+        $str1=$data.$str;
+        $str1=str_shuffle($str1);
+        $str1=substr($str1,'3','8');
+        $open_info=[
+            't_id'=>$t_id->t_id,
+            'o_num'=>$str1,
+            'c_time'=>time(),
+            'status'=>2
+        ];
+        \DB::table('open')->insert($open_info);
+        }else{
+        $str1=$t_info->o_num;
+        }
+        return view('admin/teacher/open/add',compact('str1','t_id'),['teacherInfo'=>$info]);
+    }
+    //直播开启执行
+    public function open_do()
+    {
+        $t_id=request()->post('t_id');
+
+        $res=\DB::table('open')->where(['t_id'=>$t_id])->update(['status'=>1]);
+        if($res!==false){
+            echo "开启成功请您开启 OBS 进行直播";
+            header("refresh:3;url=/admin/techer/index");
+        }
+    }
+
+    //讲师基本资料
+    public function teacherZl(Request $request)
+    {
+        $t_id = session('t_id');
+        $data =  TeacherModel::where('t_id',$t_id)->first()->toArray();
+        return view('/admin/teacher/teacherzl',['data'=>$data]);
     }
 }
