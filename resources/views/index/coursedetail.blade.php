@@ -3,16 +3,19 @@
     课程简介
 @endsection
 @section('content')
+
+
     <div class="coursecont">
         <div class="coursepic">
             <div class="course_img"><img src="{{asset($data->course_img)}}" width="500"></div>
             <div class="coursetitle">
                 <a class="state">更新中</a>
+
                 <h2 class="courseh2">{{$data->course_name}}</h2>
                 <p class="courstime">总课时：<span class="course_tt">{{$data->course_hour}}课时</span></p>
                 <p class="courstime">课程时长：<span class="course_tt">{{$data->hour_duration}}分钟</span></p>
                 <p class="courstime">学习人数：<span class="course_tt">{{$data->start_people}}人</span></p>
-                <p class="courstime">讲师：{{$dataInfo['t_name']}}</p>
+                <p class="courstime">讲师：{{$dataInfo->t_name}}</p>
                 <p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">{{$data->course_speak_score}}分（{{$data->course_speak_people}}人评价）</span></p>
                 <!--<p><a class="state end">完结</a></p>-->
 
