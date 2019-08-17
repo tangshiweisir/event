@@ -46,37 +46,12 @@
             <div class="clearh"></div>
             <h3 class="leftit">课程目录</h3>
             <dl class="mulu">
-                <dt><a href="coursecont1.html" class="graylink">第一章&nbsp;&nbsp;总论</a></dt>
-                <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
+            @foreach($section as $k=>$v)
+                <dt><a href="/index/coursecont" class="graylink">第{{$k+1}}章&nbsp;&nbsp;{{$v->section_name}}</a></dt>
+                <dd>{{$v->section_content}}</dd>
+            @endforeach
 
-
-                <dt><a href="#" class="graylink">第二章&nbsp;&nbsp;会计要素与会计等式</a></dt>
-                <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
-
-
-                <dt><a href="#" class="graylink">第三章&nbsp;&nbsp;会计科目与账户</a></dt>
-                <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
-
-                <dt><a href="#" class="graylink">第四章&nbsp;&nbsp;会计记账方法</a></dt>
-                <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
-
-                <dt><a href="#" class="graylink">第五章&nbsp;&nbsp;借贷记账法下主要经济业务的账务处理</a></dt>
-                <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
-
-                <dt><a href="#" class="graylink">第六章&nbsp;&nbsp;会计凭证</a></dt>
-                <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
-
-                <dt><a href="#" class="graylink">第七章&nbsp;&nbsp; 会计账簿</a></dt>
-                <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
-
-                <dt><a href="#" class="graylink">第八章&nbsp;&nbsp;账务处理程序</a></dt>
-                <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
-
-                <dt><a href="#" class="graylink">第九章&nbsp;&nbsp; 财产清查</a></dt>
-                <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
-
-                <dt><a href="#" class="graylink">第十章&nbsp;&nbsp;财务报表</a></dt>
-                <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
+            
             </dl>
         </div>
 
@@ -87,10 +62,10 @@
                     <div class="teacher">
                         <div class="teapic ppi">
                             <a href="{{url('/index/teacher')}}" target="_blank"><img src="images/teacher.png" width="80" class="teapicy" title="张民智"></a>
-                            <h3 class="tname"><a href="{{url('/index/teacher')}}" class="peptitle" target="_blank">张民智</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
+                            <h3 class="tname"><a href="{{url('/index/teacher')}}" class="peptitle" target="_blank">{{$dataInfo->t_name}}</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
                         </div>
                         <div class="clearh"></div>
-                        <p>十年以上Linux从业经验， 培训经验超过八年。在各 个知名培训机构做过金牌 讲师、学科负责人，培训 学员过万人。曾获红帽认 证讲师，微软认证讲师等 资质认证。教学以逻辑性 强、教学细致、知识点准 确著称。</p>
+                        <p>{{$dataInfo->t_desc}}</p>
                     </div>
                 </div>
             </div>
