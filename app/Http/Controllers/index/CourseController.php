@@ -252,10 +252,6 @@ class CourseController extends Controller
             ->get()
             ->toArray();
 
-        dd($arr);
-        #问题表 教室表 课程表 回答表
-
-//        dd($arr);
         #问题表 讲师表 课程表 回答表
         $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
             ->join('teacher','teacher.t_id','=','reply.t_id')
@@ -270,6 +266,9 @@ class CourseController extends Controller
         $data = UserIndexModel::where('user_id', $user_id)->first();
         return view('index/wen', ['arr'=>$arr,'arr2'=>$arr2,'data'=>$data]);
     }
+
+
+
     /**
      * @content 用户对讲师提出问题
      * */
