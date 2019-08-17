@@ -209,8 +209,11 @@ class CourseController extends Controller
      *我的笔记
      */
     public function meword(){
-        $ress=WordModel::get();
-        $user_id = session('user_id');
+        $user_id=session('user_id');
+        $ress=WordModel::join('user_index','word.user_id','=','user_index.user_id')
+            ->where('word.user_id',$user_id)
+            ->get();
+//        dd($ress);
         $data = UserIndexModel::where('user_id', $user_id)->first();
         return view('index.meword',['data'=>$data,'res'=>$ress]);
 
@@ -247,9 +250,10 @@ class CourseController extends Controller
      */
     public function myask(){
         #用户表 问题表 课程表
+        $user_id = session('user_id');
         $arr=WenModel::join('user_index','user_index.user_id','=','wen.user_id')
             ->join('course','course.course_id','=','wen.course_id')
-//            ->where('wen.status','=',1)
+            ->where('wen.user_id','=',$user_id)
             ->get()
             ->toArray();
 

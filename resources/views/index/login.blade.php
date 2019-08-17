@@ -31,7 +31,7 @@
    <a href="/index/emailcheck" class="link-muted">找回密码</a>
 </div>
     <div style="margin-left: 150px;margin-top:20px;">
-        <a href=" https://api.weibo.com/oauth2/authorize?client_id=305250602&response_type=code&redirect_uri=http://www.onedu.com/index/callback">
+        <a href="https://api.weibo.com/oauth2/authorize?client_id=305250602&response_type=code&redirect_uri=http://www.shop.cn/index/callback">
             <img src="images/hezuowb.png" class="hzwb" title="微博" width="40" height="40"/>
         </a>
     </div>

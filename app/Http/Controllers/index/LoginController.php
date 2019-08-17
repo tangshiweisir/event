@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\index;
 
+use App\Models\UserIndexModel;
 use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -104,9 +105,10 @@ class LoginController extends Controller
     /**
      * @content 退出登录
      * */
-    public function logout()
+    public function logout(Request $request)
     {
-        session(['user_id'=>""]);
+        $request->session()->forget('user_id');
+        $request->session()->forget('user_name');
         return redirect('/index/index');
     }
 
@@ -118,12 +120,8 @@ class LoginController extends Controller
     {
         set_time_limit(0);
         $code = $request->code;
-//        dd($code);die;
-
-        $url = "https://api.weibo.com/oauth2/access_token?client_id=305250602&client_secret=5029705c7d70dfcc82f07aaf395008b3&grant_type=authorization_code&redirect_uri=http://www.onedu.com/index/callback&code=".$code;
+        $url = "https://api.weibo.com/oauth2/access_token?client_id=305250602&client_secret=5029705c7d70dfcc82f07aaf395008b3&grant_type=authorization_code&redirect_uri=http://www.shop.cn/index/callback&code=".$code;
         $data = $this->curl($url);
-//            dd($data);
-
         //获取微博登陆用户的信息
         $userInfo=json_decode($data,true);
         $token = $userInfo['access_token'];
@@ -133,7 +131,6 @@ class LoginController extends Controller
 //        dd($urla);
 //        $uu = $this->curl($urla);
         $uu = file_get_contents($urla);
-//        dd($uu);
         $user = json_decode($uu,true);
         $user_name = $user['screen_name'];
         $data = [
@@ -141,8 +138,8 @@ class LoginController extends Controller
             'token'=>$token,
             'ctime'=>time()
         ];
-        $res = UsersModel::insert($data);
-        $res1=UsersModel::where('user_name',$user_name)->first();
+        $res = UserIndexModel::insert($data);
+        $res1=UserIndexModel::where('user_name',$user_name)->first();
 
         if($res){
             session(['user_id'=>$res1->user_id,'user_name'=>$res1->user_name]);

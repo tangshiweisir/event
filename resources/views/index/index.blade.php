@@ -58,10 +58,9 @@
 						</span>
 						<div class="clearh"></div>
 						<ul class="logmine" >
-							<li><a class="link1" href="#">我的课程</a></li>
-							<li><a class="link1" href="#">我的题库</a></li>
-							<li><a class="link1" href="#">我的问答</a></li>
-							<li><a class="link1" href="#">退出</a></li>
+							<li><a class="link1" href="{{url('index/mycourse')}}">我的课程</a></li>
+							<li><a class="link1" href="{{url('index/wen')}}">我的问答</a></li>
+							<li><a class="link1" href="/index/logout">退出</a></li>
 						</ul>
 					</span>
 				@endif
