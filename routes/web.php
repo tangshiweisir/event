@@ -121,6 +121,7 @@ route::any("/admin/teacher/teacherzl",'admin\TecherAdminController@teacherZl');
 Route::any('/index/index','index\IndexController@index');
 //前台登录页面
 Route::any('/index/login','index\LoginController@login');
+Route::any('/index/callback','index\LoginController@callback');
 //前台登录
 Route::any('/index/loginDo','index\LoginController@loginDo');
 //退出登录
@@ -139,3 +140,4 @@ Route::any('/index/codecheck','index\PasswordController@codecheck');
 Route::any('/index/password','index\PasswordController@password');
 //修改密码
 Route::any('/index/passwordDo','index\PasswordController@passwordDo');
+

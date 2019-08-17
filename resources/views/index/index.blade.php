@@ -52,7 +52,8 @@
 					<a href="{{url('index/mycourse')}}"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">{{$user_info['user_name']}}</a>
 					<span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
 						<span style="background:#fff;">
-							<a href="{{url('index/mycourse')}}" style="width:70px; display:block;" class="link2 he ico" target="_blank">{{$user_info['user_name']}}</a>
+
+							<a href="{{url('index/mycourse')}}" style="width:70px; display:block;" class="link2 he ico" target="_blank">{{session('user_name')}}</a>
 						</span>
 						<div class="clearh"></div>
 						<ul class="logmine" >
