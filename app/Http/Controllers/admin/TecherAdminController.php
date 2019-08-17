@@ -18,9 +18,13 @@ class TecherAdminController extends Controller
             header("Refresh:2;url=/admin/teacher/login");
         } else {
             $teacherInfo = $_SESSION['teacherInfo'];
+//            dd($teacherInfo);
             $t_id = session('t_id');
             $data = TeacherModel::where('t_id', $t_id)->first();
             return view('admin/techerindex', ['teacherInfo' => $teacherInfo, 'data' => $data]);
+            $teat =  TeacherModel::where('t_id',$t_id)->first();
+//            dd($ttt);
+            return view('admin/techerindex',['teacherInfo'=>$teacherInfo,'teat'=>$teat]);
         }
     }
 
@@ -83,18 +87,33 @@ class TecherAdminController extends Controller
         session(['t_id' => ""]);
         return redirect('/admin/techer/index');
     }
-
+    /**
+     * @content 退出登录
+     * */
+    public function logouted(Request $request)
+    {
+        $request->session()->forget('teacherInfo');
+        $request->session()->forget('t_id');
+        return redirect('/admin/techer/index');
+    }
     //视频添加
     public function vliodcerate()
     {
         $data = \DB::table('course')->get();
 //        dd($data);
         return view('admin.teacher.volid.add', compact('data'));
+        session_start();
+        $teacherInfo = $_SESSION['teacherInfo'];
+        return view('admin.teacher.volid.add',compact('data','data','teacherInfo','teacherInfo'));
+
     }
 
     public function vliodadd_do()
     {
         $data = request()->post();
+        session_start();
+        $teacherInfo = $_SESSION['teacherInfo'];
+        $data=request()->post();
         if (request()->hasfile('v_video')) {
             $data['v_video'] = $this->upload('v_video');
         }
@@ -124,39 +143,11 @@ class TecherAdminController extends Controller
     }
 
 
-    public function vliodlist()
-    {
-        $data = DB::table('video')->get();
-        $data = json_encode($data);
-//        dd($data);
-        $data = json_decode($data, true);
-//        dd($data);
-        $course_id = [];
-        foreach ($data as $k => $v) {
 
-            $course_id[] = $v['course_id'];
-
-
-            $course_info = DB::table('course')->whereIn('course_id', $course_id)->get();
-
-            $course_info = json_encode($course_info);
-            $course_info = json_decode($course_info, true);
-            foreach ($course_info as $ka => $va) {
-                $data[$k]['course_name'] = $va['course_name'];
-
-            }
-
-        }
-
-//        dd($data);
-
-        return view('admin/teacher/volid/v_list', compact('data'));
-    }
 
 
         //开启直播
-        public
-        function t_open()
+       public function t_open()
         {
             session_start();
             $info = $_SESSION['teacherInfo'];
@@ -184,8 +175,6 @@ class TecherAdminController extends Controller
             return view('admin/teacher/open/add', compact('str1', 't_id'));
         }
 
-        //直播开启执行
-        public
         function open_do()
         {
             $t_id = request()->post('t_id');

@@ -42,30 +42,29 @@ class CourseController extends Controller
     public function courseDetail(){
         $course_id=$_GET['course_id'];
         $data=DB::table('course')->where(['course_id'=>$course_id,'status'=>1])->first();
-//        var_dump($data);die;
         $t_id=$data->t_id;
         $dataInfo=DB::table('teacher')->where(['t_id'=>$t_id,'audit'=>1])->first();
-//        var_dump($dataInfo);die;
-        return view('index.coursedetail',['data'=>$data,'dataInfo'=>$dataInfo]);
+        //查找本课程下的课章数据
+        $section=DB::table('course_section')->where(['status'=>1])->get();
+        return view('index.coursedetail',['data'=>$data,'dataInfo'=>$dataInfo,'section'=>$section]);
     }
     /**
      * 课程加入学习
      */
     public function coursecont(Request $request){
+        //问答
         $course_id = $request->course_id;
         $arr=WenModel::where(['course_id'=>$course_id])
             ->join('user_index','user_index.user_id','=','wen.user_id')
             ->orderBy('wen.c_time','desc')
             ->get()
             ->toArray();
-//        dd($arr);
+
         $arr1=LeavesWordModel::where(['course_id'=>$course_id])
             ->join('user_index','user_index.user_id','=','leave_words.u_id')
             ->where('leave_words.status','=',1)
             ->get()
             ->toArray();
-//        dd($arr1);
-
         $course_wen = [];
         foreach ($arr as $k=>$v){
             if($v['course_id'] == $course_id){
@@ -81,7 +80,21 @@ class CourseController extends Controller
         $user_id = session('user_id');
         $data = UserIndexModel::where('user_id', $user_id)->first();
 
-        return view('index/coursecont', ['teacherReply'=>$teacherReply,'arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id,'arr1'=>$arr1]);
+        //课程信息
+        $course=DB::table('course')->where(['course_id'=>$course_id,'status'=>1])->first();
+        $t_id=$course->t_id;
+        $teacher=DB::table('teacher')->where(['t_id'=>$t_id,'audit'=>1])->first();
+        //章节课时处理数据
+        $section=DB::table('course_section')->where(['status'=>1])->get();
+        foreach($section as $k=>$v){
+           $res=DB::table('course_lesson')->where(['section_id'=>$v->section_id])->get();
+           $section[$k]->arr=$res;
+           foreach($res as $kk=>$vv){
+            $arr=DB::table('course_hour')->where(['lesson_id'=>$vv->lesson_id])->get();
+            $res[$kk]->arr=$arr;
+           }
+        }
+        return view('index/coursecont', ['teacherReply'=>$teacherReply,'arr'=>$course_wen,'data'=>$data,'course_id'=>$course_id,'arr1'=>$arr1,'course'=>$course,'teacher'=>$teacher,'section'=>$section]);
     }
     /**
      * 个人中心
@@ -157,13 +170,6 @@ class CourseController extends Controller
         }
 
     }
-     //课程详情
-    public function coursecont1()
-     {
-         return view('index/coursecont1');
-     }
-
-
     //添加留言
     public function leaveMessage(Request $request)
     {
@@ -257,10 +263,9 @@ class CourseController extends Controller
             ->get()
             ->toArray();
 
-//        dd($arr);
-        #问题表 教室表 课程表 回答表
 
 //        dd($arr);
+        #问题表 教室表 课程表 回答表
         #问题表 讲师表 课程表 回答表
         $arr2=ReplyModel::join('wen','wen.wen_id','=','reply.wen_id')
             ->join('teacher','teacher.t_id','=','reply.t_id')
@@ -275,6 +280,9 @@ class CourseController extends Controller
         $data = UserIndexModel::where('user_id', $user_id)->first();
         return view('index/wen', ['arr'=>$arr,'arr2'=>$arr2,'data'=>$data]);
     }
+
+
+
     /**
      * @content 用户对讲师提出问题
      * */
