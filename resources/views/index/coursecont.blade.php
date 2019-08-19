@@ -172,12 +172,11 @@
                         <ul class="evalucourse">
                             @foreach($arr1 as $k=>$v)
                             <li>
-                        	    <span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-                                    <p class="pepname">{{$v['user_name']}}</p>
+                        	    <span class="pephead" width="200"><img src="images/0-0.JPG" title="候候">
+                                    <p>{{$v['l_contents']}}</p>
                                 </span>
-                                <span class="pepcont"><p>{{$v['l_contents']}}</p>
+                                <span><p>{{$v['user_name']}}</p><br/>
                                 <p class="peptime pswer">{{date("Y-m-d H:i",$v['c_time'])}}</p></span>
-
                             </li>
                             @endforeach
                         </ul>
@@ -429,10 +428,11 @@
             //评价
             $(".fombtn1").click(function(){
                 var _text = $(".sss").val();
+                var course_id ='{{$course_id}}';
                 $.ajax({
                     url:"/index/leaveMessage",
                     type:'POST',
-                    data:{text:_text},
+                    data:{course_id:course_id,text:_text},
                     success:function(res){
                         if(res.code=='1'){
 //                            console.log(res);
@@ -441,7 +441,8 @@
                         }else{
 //                            console.log(res);
                             alert(res.font);
-                            location.href='/index/coursecont';
+                            // location.href='/index/coursecont';
+                            location.reload();
                         }
 
                     }

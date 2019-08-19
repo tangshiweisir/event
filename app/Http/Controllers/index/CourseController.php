@@ -173,6 +173,7 @@ class CourseController extends Controller
     //添加留言
     public function leaveMessage(Request $request)
     {
+        $course_id = $request->course_id;
         $user_id = session('user_id');
         $text = $_POST['text'];
         if (empty($user_id)){
@@ -182,9 +183,10 @@ class CourseController extends Controller
             ];
             return  $request;
         }else{
-            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'course_id'=>1,'c_time'=>time()]);
+            $res= DB::table('leave_words')->insert(['l_contents'=>$text,'u_id'=>$user_id,'course_id'=>$course_id,'c_time'=>time()]);
             if($res){
                 $request=[
+                    'course_id'=>$course_id,
                     'code'=>2,
                     'font'=>'留言成功，待审核'
                 ];
